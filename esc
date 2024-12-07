@@ -1,0 +1,67 @@
+[33mcommit e4de9ffc3d27bab53203c145868830da756414a4[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: Michelle <lulegonzaleznataliamichelle@gmail.com>
+Date:   Tue Oct 8 08:01:55 2024 -0600
+
+    Navegador secundario con el JSP pal nombre y los iconitos
+
+[33mcommit e76383a7434bbdfc86864bbca6776b8856253b75[m[33m ([m[1;31morigin/branch-huitzil[m[33m)[m
+Author: Huitzil <huitzil.cruz.omaralejandro@gmail.com>
+Date:   Mon Oct 7 22:31:14 2024 -0600
+
+    Agruegé el esqueleto del navegador 2 y lo básico de CSS
+
+[33mcommit e203182c0bea50cecf92a41e7e659f68a912685b[m
+Author: Huitzil <huitzil.cruz.omaralejandro@gmail.com>
+Date:   Mon Oct 7 18:34:48 2024 -0600
+
+    Na más pa comprobar que si agarran los cambios de NetBeans y hacer los commits en git bash
+
+[33mcommit 8905c8e61428abc31cd1957dc681adc74dbf90c2[m
+Author: Huitzil <huitzil.cruz.omaralejandro@gmail.com>
+Date:   Mon Oct 7 17:45:40 2024 -0600
+
+    Modificación para ver si ya no hay problemas 3ra parte. (Le faltaba el server)
+
+[33mcommit 6ed0b87774b76846a3c437a5cc0d1fa4c7736cfc[m
+Author: Huitzil <huitzil.cruz.omaralejandro@gmail.com>
+Date:   Mon Oct 7 17:44:02 2024 -0600
+
+    Modificación para ver si ya no hay problemas 2da parte.
+
+[33mcommit 323c77b3ec45eda2c007baca36d49699a6be501d[m
+Merge: 203adec 8aab3a5
+Author: Huitzilinoa007 <huitzil.cruz.omaralejandro@gmail.com>
+Date:   Mon Oct 7 08:05:50 2024 -0600
+
+    Merge branch 'master' of https://github.com/ASDPrograms/castor-way
+    Cambios necesarios para ajustar el proyecto con el web.xml
+
+[33mcommit 203adecbe4bc074a5bb084ce2a27b10b43179256[m
+Author: Huitzilinoa007 <huitzil.cruz.omaralejandro@gmail.com>
+Date:   Mon Oct 7 08:04:20 2024 -0600
+
+    Resolver conflictos y fusionar mi-rama en master
+
+[33mcommit 0110c1063db233d638cb894096847f3688121e71[m
+Author: Huitzilinoa007 <huitzil.cruz.omaralejandro@gmail.com>
+Date:   Mon Oct 7 07:32:43 2024 -0600
+
+    Se agrgó el web.xml, podemos chambear
+
+[33mcommit 8aab3a5c68c40359558c4a053b2ac9f23cff7b1f[m
+Author: Huitzilinoa007 <147749616+Huitzilinoa007@users.noreply.github.com>
+Date:   Mon Oct 7 07:05:57 2024 -0600
+
+    Delete web/WEB-INF
+
+[33mcommit 34c90081c719604c554ee92c3c7322fa92af9d3e[m
+Author: Huitzilinoa007 <147749616+Huitzilinoa007@users.noreply.github.com>
+Date:   Mon Oct 7 07:05:09 2024 -0600
+
+    Create WEB-INF
+
+[33mcommit 98e829533ebd8308548fb5bfd3a690d8e46db64d[m[33m ([m[1;31morigin/branch-alicia[m[33m)[m
+Author: Huitzil <huitzil.cruz.omaralejandro@gmail.com>
+Date:   Fri Oct 4 22:10:29 2024 -0600
+
+    CastorWay cargado con lo escencial para poder empezar a trabajar en equipo.

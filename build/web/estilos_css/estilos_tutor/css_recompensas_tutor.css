@@ -1,0 +1,1863 @@
+:root{
+    --cafe: #885551;
+    --cafecito: #BA6958;
+    --cafecitititito: #F7B9A2;
+    --turquesita: #9FD8CB;
+    --awuita: #879FD4;
+    --azulito: #CFE1FF;
+    --amarillito: #FFDF9B;
+    --verdecito:#52B788;
+    --azul:#879FD4;
+}
+
+.gayathri-thin {
+    font-family: "Gayathri", system-ui;
+    font-weight: 100;
+    font-style: normal;
+}
+
+.gayathri-regular {
+    font-family: "Gayathri", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.gayathri-bold {
+    font-family: "Gayathri", system-ui;
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100vh;
+    width: 250px;
+    background-color: white;
+    padding: 10px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    transition: width 0.3s, height 0.3s, bottom 0.3s;
+    overflow: hidden;
+}
+
+.sidebar.collapsed {
+    width: 70px;
+}
+
+.logo-section, .icon-section, .bottom-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+
+.logo {
+    width: 1.5rem;
+    height: auto;
+}
+
+.icon-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.bottom-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+    padding-top: 0;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+    transition: padding 0.3s;
+}
+
+.icon {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+#iconoNavLogo{
+    width: auto;
+    height: 2.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.textNav {
+    color: black;
+    font-size: 22px;
+    white-space: nowrap;
+    transition: display 0.3s, margin 0.3s;
+    font-family: "Gayathri", system-ui;
+    font-weight: 700;
+    font-style: normal;
+    margin: 0 auto;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+
+.sidebar.collapsed .text {
+    display: none;
+}
+
+.sidebar.collapsed .menu-item {
+    padding: 10px 15px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar.collapsed #logoNavbar{
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar.collapsed .menu-item .textNav {
+    display: none;
+}
+
+
+
+.menu-item:hover {
+    background-color: #EDF3FF;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.menu-item:hover .textNav {
+    color: #ADBBE4;
+}
+
+
+@media (max-height: 600px) {
+    .sidebar {
+        height: 100vh;
+        width: 250px; /* Mantener el ancho */
+        overflow-y: hidden; /* Evitar scroll vertical */
+    }
+
+    .icon-section {
+        display: flex;
+        flex-direction: column; /* Mantener los íconos en columna */
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .menu-item {
+        flex: 1;
+        justify-content: center;
+        padding: 10px 0;
+    }
+
+    .icon {
+        width: 35px;
+        height: 35px;
+    }
+
+    .bottom-section {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .sidebar.collapsed {
+        width: 70px;
+        height: auto;
+        overflow-y: hidden;
+    }
+
+    .sidebar.collapsed .icon-section {
+        flex-direction: column;
+    }
+
+    /* Asegurar que los íconos sean visibles en todas las resoluciones pequeñas */
+    .sidebar.collapsed .menu-item {
+        justify-content: center;
+        padding: 8px;
+    }
+
+    .sidebar.collapsed .menu-item .icon {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+@media (max-width: 768px) {
+.sidebar {
+    display:block;
+        flex-direction: row; /* Cambiar a fila */
+        height: auto; /* Ajustar la altura para móviles */
+        width: 100%; /* Tomar todo el ancho de la pantalla */
+        bottom: 0; /* Fijar en la parte inferior de la pantalla */
+        top: auto;
+        padding: 0;
+    }
+    .bottom-section {
+        display: none; /* Ocultar toda la sección inferior */
+    }
+
+    .menu-item.toggle {
+        display: none; /* Ocultar botones individuales */
+    }
+
+    .icon-section {
+        flex-direction: row; /* Distribuir los íconos en fila */
+        justify-content: space-between; /* Espaciarlos de manera uniforme */
+        align-items: center;
+        width: 100%;
+    }
+
+    .sidebar {
+        flex-direction: row;
+        height: auto;
+        width: 100%;
+        bottom: 0;
+        top: auto;
+        padding: 0;
+    }
+
+    .textNav{
+        display: none;
+    }
+
+    .logo-section,
+    .bottom-section {
+        display: none;
+    }
+
+    .menu-item {
+        flex: 1;
+        justify-content: center;
+        padding: 15px 0;
+    }
+
+    .icon {
+width: auto;
+        height: 5vw;
+    }
+
+    .sidebar.collapsed {
+        width: 100%;
+    }
+
+    .sidebar.collapsed .icon-section {
+        justify-content: space-between;
+        background-color: white;
+    }
+    .sidebar.collapsed .menu-item .icon {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+    }
+    .icon-section {
+        justify-content: space-between;
+        background-color: white;
+        padding: 0px;
+    }
+    .menu-item .icon {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    icon icon1 .icon icon1{
+        background-color: #EDF3FF;
+    }
+
+    #logoNavbar{
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        display: none;
+    }
+    .sidebar.collapsed #logoNavbar{
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        display: none;
+    }
+    .icon-section{
+        display:flex;
+        flex-direction: row;
+    }
+
+    #div_nav_home{
+        background-color: white;
+    }
+
+
+
+}
+
+@media (max-width: 645px) {
+ 
+
+    .menu-item {
+        padding: 10px 0;
+    }
+
+    .content {
+        padding: 20px;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+}
+
+@media (min-width:769px) {
+    .content {
+        margin-left: 270px;
+        padding: 20px;
+        padding-left: 40px;
+        height: 100%;
+        overflow-y: auto;
+    }
+    .sidebar.collapsed + .content {
+        margin-left: 90px;
+    }
+
+    .sidebar.collapsed .menu-item .icon {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 0;
+        left: 0;
+    }
+    .sidebar.collapsed #logoNavbar{
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+    }
+    
+
+}
+@media (max-width:768px){
+    .div-container-table-scroll{
+        display: none;
+    }
+}
+
+.content {
+    padding: 20px;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+    height: 100%;
+    background-color: #EDF3FF;
+    overflow: auto;
+}
+
+
+
+
+.menu-item {
+    display: flex;
+    align-items: center;
+        justify-content: flex-start;
+}
+
+.a_nav {
+    text-decoration: none; /* Elimina subrayado */
+    color: inherit; /* Mantiene el color del texto */
+    padding: 0; /* Elimina padding */
+    margin: 0; /* Elimina margin */
+    display: flex; /* Asegura que el enlace no altere el flujo */
+    align-items: center; /* Centra verticalmente */
+    width: 100%; /* Asegura que ocupe el espacio disponible */
+}
+
+#div_nav_home{
+    background-color: #EDF3FF;
+}
+
+
+
+/*Estilos del nav*/
+.secondary-nav {
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: #EDF3FF;
+    height: 3.3em;
+    height: auto;
+    width: 100%;
+}
+
+.izquierda-secondary-nav{
+    max-width: 60%;
+    font-family: "Gayathri", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2.2rem;
+}
+
+.sec-nav-perfil{
+    display: flex;
+}
+
+.second-nav-hojas-congeladas{
+    color: black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: #21B3D3;
+    padding-left: 5px;
+    font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2rem;
+}
+
+.second-nav-ramitas{
+    color: black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: #664126;
+    padding-left: 5px;
+    font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2rem;
+}
+
+
+.secondary-nav {
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: transparent;
+    height: 3em;
+    height: auto;
+}
+
+.izquierda-secondary-nav{
+    max-width: 60%;
+    font-family: "Gayathri", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2rem;
+    height: auto;
+}
+
+
+.derecha-secondary-nav{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: end;
+}
+
+@media (max-width: 800px) {
+    .derecha-secondary-nav{
+        display: flex;
+        margin: 0 auto;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+        padding-top: 10px;
+    }
+    .izquierda-secondary-nav{
+        display: none;
+    }
+    #icono-notificaciones-secondary-nav{
+        padding: 0;
+    }
+    #icono-perfil-secondary-nav{
+        padding: 0;
+    }
+    #texto-hojas-cong-secondary-nav{
+        padding: 0;
+    }
+    #texto-ramitas-secondary-nav{
+        padding: 0;
+    }
+}
+.sec-nav-perfil{
+    display: flex;
+}
+
+.secondary-nav a {
+    color: black;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.principal{
+    padding-top: 1vw;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 25% 45% 20%;
+    height: calc(100% - 48px);
+    overflow: auto;
+}
+
+td{
+    width: auto;
+    min-width: 5vw;
+}
+
+#container-burbuja-img-text{
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+.burbujas-escondidas{
+    display: none;
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+#td-burbujas-escondidas{
+    display: none;
+}
+
+#container-wrapper{
+    z-index: 100000;
+    padding: 1vw;
+    ;
+}
+.img-text-container {
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 10000;
+    width: 50px; /* Tamaño del círculo */
+    height: 50px;
+    position: static; /* Necesario para que el botón se posicione relativo a este contenedor */
+    flex: 1;
+    z-index: 10000;
+    padding: 15px;
+
+}
+
+.span-text-container {
+    flex: 1;
+    z-index: 10000;
+    height: 100%;
+    width: 100%;
+    padding: 15px;
+    padding-left: 0px;
+}
+
+#span-nombre-burbuja{
+    font-family: "Gayathri", system-ui;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1.2rem;
+}
+
+.circle-img img {
+    display: inline-block;
+    width: 100%;
+    height: 100%; /* Mantener la imagen dentro del contenedor circular */
+    object-fit: cover; /* Ajuste para cubrir completamente el área */
+}
+
+.button-overlay {
+    position: absolute;
+    bottom: -13px; /* Ajusta la distancia desde el borde inferior */
+    right: -13px; /* Ajusta la distancia desde el borde derecho */
+    background-color: transparent; /* Fondo semi-transparente */
+    color: white;
+    border: none;
+    padding: 5px;
+    z-index: 10000000;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 50%; /* Bordes redondeados del botón */
+    float: right;
+    width: auto;
+}
+
+#imgCambiarHijos{
+    height: 2rem;
+    width: 2rem;
+}
+
+/* Estilo para la tabla */
+.tabla{
+    border-collapse: collapse; /* Para eliminar espacios entre celdas */
+    z-index: 1000; /* Asegúrate de que la tabla esté por encima de otros elementos */
+    position: relative; /* Necesario para el z-index */
+    border-radius: 1.5rem;
+    background: white;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .tabla{
+        border-collapse: collapse; /* Para eliminar espacios entre celdas */
+        z-index: 1000; /* Asegúrate de que la tabla esté por encima de otros elementos */
+        position: relative; /* Necesario para el z-index */
+        border-radius: 1.5rem;
+        background: white;
+        margin-bottom: 80px;
+    }
+}
+
+/* Estilo para la imagen dentro de la celda */
+.circle-img {
+    position: relative; /* Asegura que el contenido se posicione correctamente */
+    display: inline-block; /* Para que el contenido se alinee correctamente */
+}
+
+#nombre-burbuja{
+    position: relative;
+    color: black;
+    z-index: 100000;
+    color: black;
+    display: inline-block;
+    font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1.2vw;
+    margin: 0;
+}
+
+/* Asegúrate de tener esto en tu CSS */
+#burbujas-escondidas {
+    display: none; /* Oculta las burbujas por defecto */
+    transition: opacity 0.3s ease; /* Transición suave */
+}
+
+#burbujas_escondidas .active {
+    display: block; /* Muestra la burbuja activa */
+    opacity: 1; /* Asegúrate de que sea completamente opaco */
+}
+
+
+
+
+
+/* Estilos para el modal */
+
+/* Estilos para el modal */
+#noChildModal {
+    display: flex;
+    justify-content: center;  /* Centra horizontalmente */
+    align-items: center;
+    position: fixed;
+    z-index: 1000000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5); /* Fondo semitransparente */
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 90%;  /* Ajuste responsivo */
+    max-width: 500px;  /* Ancho máximo del modal */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra para un mejor efecto */
+}
+
+
+
+.div-container-table-scroll{
+    width: 100%;
+    overflow-x: auto;
+}
+
+.act_tit{
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    flex: .5;
+    width: 100%;
+}
+
+.contenedor-button-add-actividad{
+    display: flex; /* Activar Flexbox */
+    justify-content: flex-end; /* Alinear el botón a la derecha horizontalmente */
+    align-items: center; /* Centrar el botón verticalmente */
+    margin-right: 30px;
+}
+/* Personalización de la barra de desplazamiento */
+#container-wrapper::-webkit-scrollbar {
+    height: 8px; /* Altura de la barra de desplazamiento */
+}
+
+#container-wrapper::-webkit-scrollbar-thumb {
+    background-color: #879FD4; /* Color del pulgar */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+#container-wrapper::-webkit-scrollbar-track {
+    background-color: #f0f0f0; /* Color del fondo de la barra */
+}
+
+#container-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 30px; /* Ajusta el ancho del gradiente */
+    background: linear-gradient(to left, #ffffff, transparent);
+    pointer-events: none; /* Ignora los clics en esta área */
+}
+
+.crearAct_Btn{
+    border-radius: 100px;
+    border: none;
+    background-color: var(--cafecito);
+    width: 4vw;
+    height: 4vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.crearAct_Btn:hover{
+    background-color: var(--cafe);
+}
+.crearAct_Btn img{
+    width: 2vw;
+    height: 2vw;
+}
+
+
+/* Estilos básicos del modal */
+.modal-crear-actividad {
+    position: fixed;
+    z-index: 10000000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    display: none; /* Oculto inicialmente */
+
+}
+
+/* Contenido del modal */
+.modal-content-crear-actividad {
+    background-color: white;
+    padding: 2vw;
+    border: 1px solid #888;
+    width: fit-content; /* Puedes ajustar el ancho del modal */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 1.5rem; /* Borde redondeado */
+    max-width: 80vw;
+}
+
+/* Botón para cerrar el modal */
+.cerrar-modal-btn {
+    justify-content: flex-start;
+    width: 10vw;
+    margin-top: 2vw;
+    padding: 1vw 2vw;
+    background-color: white;
+    color: black;
+    border-radius: 1.5rem;
+    border: 2px solid #8F8F8F;
+    cursor: pointer;
+}
+
+.cerrar-modal-btn:hover {
+    background-color: #8F8F8F;
+    color: white;
+}
+
+#mandarFormsNuevaActividad{
+    justify-content: flex-end;
+    width: 10vw;
+    align-content: end;
+    align-items: end;
+    margin-right: 0;
+    float: right;
+    margin-top: 2vw;
+    padding: 1vw 2vw;
+    background-color: #879FD4;
+    color: white;
+    border: none;
+    border-radius: 1.5rem;
+    cursor: pointer;
+}
+
+#mandarFormsNuevaActividad:hover {
+    background-color: #6F83B0;
+}
+
+.modal-separacion1{
+    height: auto;
+    display: flex;
+}
+
+.modal-separacion2{
+    display: grid;
+    grid-template-columns: 0.7fr 1fr 1fr 1fr;
+    grid-template-rows: min-content 1fr;
+    margin-bottom: 1vw;
+    align-items: flex-start;
+
+}
+.spa1{
+    height: fit-content;
+}
+.spa2{
+    height: fit-content;
+}
+.spa3{
+    height: fit-content;
+}
+.spa4{
+    height: fit-content;
+}
+/* Estilos del contenedor del selector de íconos */
+.input-icono-habito-container {
+    position: relative;
+    flex: .2;
+    align-content: center;
+    align-items: center;
+}
+
+.icon-picker {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    cursor: pointer;
+}
+
+.icon-display {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    align-content: center;
+    align-items: center;
+    border: 2px solid #ccc; /* Borde alrededor del input */
+    border-radius: 5px; /* Bordes redondeados */
+    height: 3.5vw;
+    width: 3.5vw;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    float: right;
+}
+
+.icon-display img {
+    margin: 0 auto;
+    width: 2.5vw;
+    height: 2.5vw;
+}
+
+/* Lista desplegable de iconos (inicialmente oculta) */
+.icon-options {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+ max-height: 23vw;
+    overflow-y: auto; /* Scroll si hay muchos íconos */
+    border-radius: 15px;
+}
+.content{
+    overflow-y: hidden;
+}
+#hijoadd-div{
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    flex: .5;
+    width: 100%;
+    margin: 0 auto;
+}
+.contenedor-button-add-actividad{
+    display: flex; /* Activar Flexbox */
+    justify-content: flex-end; /* Alinear el botón a la derecha horizontalmente */
+    align-items: center; /* Centrar el botón verticalmente */
+    margin-right: 30px;
+}
+
+
+.icon-picker {
+    cursor: pointer; /* Cambia el cursor al pasar sobre el icono */
+}
+
+.icon-options {
+    display: none; /* Esconde los iconos por defecto */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+}
+
+
+
+
+.modal-separacion4{
+    display:grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content 1fr min-content;
+}
+.modal-separacion5{
+    height: auto;
+    display: flex;
+}
+
+.modal-boton1{
+    flex: 1;
+}
+
+.modal-boton2{
+    flex: 1;
+}
+
+#p-nuevo-habito-tit{
+    font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 3vw;
+    margin: 0;
+}
+
+.input-nombre-habito-container{
+    flex: 2.2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 15px;
+}
+.juntador{
+    display: grid;
+    grid-template-columns: 80% 10% 10%;
+    margin-bottom: 1vw;
+    width: 100%;
+}
+.flea{
+    display: grid;
+    grid-template-rows: min-content min-content;
+}
+.input-icono-habito-container{
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+.bicho{
+    display: flex;
+    flex-direction: row;
+}
+.ima{
+    height: 5vw;
+    width: auto;
+    margin-right: 1vw;
+}
+
+.texto-input-nuevo-habito{
+    font-family: "Gayathri", system-ui;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1.2vw;
+}
+.input-nuevo-habito{
+    padding: 1vw;
+    font-family: "Gayathri", system-ui;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1.2vw;
+    border: 2px solid #ccc; /* Borde alrededor del input */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+
+#recompensaActividad{
+    width: 10vw;
+    padding-left: 5vw; /* Espacio para el ícono dentro del input */
+    padding-right: 1vw;
+    height: 3.5vw;
+    outline: none;
+    box-sizing: border-box;
+    margin-right: 3vw;
+}
+input[type="number"]:focus {
+    border-color: #007BFF; /* Color al hacer foco en el input */
+}
+
+.input-icon-number-container{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    position: relative;
+}
+
+.input-tipo-container{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+
+#opcionesCategoria{
+    padding: 1vw;
+    font-family: "Gayathri", system-ui;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1.2vw;
+    border: 2px solid #ccc; /* Borde alrededor del input */
+    border-radius: 5px; /* Bordes redondeados */
+    height:3.5vw;
+    width: 12vw;
+    box-sizing: border-box;
+    min-width: 160px;
+    margin-right: 3vw;
+}
+#opcionesNivel{
+    padding: 1vw;
+    font-family: "Gayathri", system-ui;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1.2vw;
+    border: 2px solid #ccc; /* Borde alrededor del input */
+    border-radius: 5px; /* Bordes redondeados */
+    height:3.5vw;
+    width: 12vw;
+    box-sizing: border-box;
+    min-width: 160px;
+    margin-right: 3vw;
+}
+
+#opcionesTipo{
+    padding: 1vw;
+    font-family: "Gayathri", system-ui;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1.2vw;
+    border: 2px solid #ccc; /* Borde alrededor del input */
+    border-radius: 5px; /* Bordes redondeados */
+    height:3.5vw;
+    width: 12vw;
+    box-sizing: border-box;
+    min-width: 160px;
+    margin-right: 3vw;
+}
+
+#info-extra{
+    width: 96%;
+    height: 4vw;
+    resize: none;
+}
+
+#charCount {
+    font-family: "Gayathri", system-ui;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 0.9em;
+    color: gray;
+}
+
+
+
+.error-form-nuevo-habito, #imageError{
+    color:red;
+    display:none;
+    font-size: 1.2vw;
+}
+
+.options-nombre {
+    display: none;
+    position: absolute;
+    border: 1px solid #ccc;
+    background-color: white;
+    z-index: 1;
+    width: 100%;
+    max-height: 250px;
+    width: auto;
+    overflow-y: auto;
+    top: 100%;
+    left: 0;
+}
+.options-nombre div {
+    padding: 8px;
+    cursor: pointer;
+}
+.options-nombre div:hover {
+    background-color: #f0f0f0;
+}
+.category-nombres {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
+.category-nombres {
+    margin-top: 5px;
+    pointer-events: none;
+    color: #879FD4;
+    font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1.8rem;
+}
+
+.text-options-nombre-habito{
+    font-family: "Gayathri", system-ui;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1.2vw;
+}
+.contenedor-contenido-abajo{
+    display:grid;
+    grid-template-columns: 90% 10%;
+    grid-template-rows: min-content;
+    margin-top: 1vw;
+}
+#previewImage{
+    height: 4vw;
+    width: auto;
+}
+.toast {
+    font-family: "Gayathri", system-ui;
+    font-weight: 700;
+    font-style: normal;
+    display: none;
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #EBF9EB;
+    color: black;
+    padding: 15px 15px 15px 60px;
+    border-radius: 5px;
+    z-index: 10000000;
+    align-items: center;
+    justify-content: space-between;
+    background-image: url(../../img/equis.svg);
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+}
+
+
+.toast span {
+    flex: 1;
+    font-size: calc(0.5rem + 0.3vw);
+    z-index: 10000000;
+}
+.td-iconos-form-habito{
+    text-align: center;
+}
+/* Lista desplegable de iconos (inicialmente oculta) */
+.icon-options {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 400px;
+    overflow-y: auto; /* Scroll si hay muchos íconos */
+    border-radius: 15px;
+}
+
+.icon-options img {
+    width: 3.5vw;
+    height: 3.5vw;
+    margin: 5px;
+    cursor: pointer;
+}
+.imagen {
+    position: relative;
+    width: 100%;
+    height: auto; /* Ajusta según sea necesario */
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 1.5rem;
+}
+
+.flechitas {
+    position: absolute;
+    bottom: 0; /* Asegura que el contenedor esté en la parte inferior */
+    left: 0; /* Ocupa todo el ancho */
+    right: 0; /* Asegura que el contenedor ocupe todo el ancho */
+    display: flex; /* Usa flexbox */
+    justify-content: space-between; /* Distribuye el espacio entre el texto y las flechas */
+    align-items: center; /* Alinea verticalmente en el centro */
+    padding: 0 2vw; /* Espaciado a los lados */
+}
+
+.Premio1 {
+    padding: 1vw;
+    padding-bottom: 0.3vw;
+    font-family: "Gayathri", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2.5vw;
+}
+
+.flechas-container {
+    display: flex; /* Usa flexbox para alinear las flechas */
+    align-items: center; /* Alinea las flechas verticalmente al centro */
+}
+
+.fle {
+    margin-left: 1.5vw; /* Separación de 1.5vw entre las flechas */
+}
+
+.fle img {
+    cursor: pointer; /* Cambiar el cursor al pasar sobre la imagen */
+    width: 1.8vw;
+    height:auto;
+}
+
+.icon-options img:hover {
+    border: 2px solid #DB8978;
+}
+#text-hijo-no-seleccionado{
+    font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2em;
+    text-align: center;
+    line-height: 0.8;
+}
+#div-conrainer-img-hijono-seleccionado-text{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+#div-conrainer-img-hijono-seleccionado-img{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+#div-container-nopremio-img{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.no-premios{
+    font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 3vw;;
+    text-align: center;
+    line-height: 0.8;
+    display:flex;
+    width: 100%;
+    
+    align-items: center;
+    justify-content: center;
+}
+#img-hijo-no-premio{
+    height: 12vw;
+    width: auto;
+}
+.fav {
+    font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 3vw;
+    text-align: left;
+    line-height: 0.8;
+    margin: 0;
+     grid-column: span 3;
+}
+
+.prem {
+    display: flex; /* Cambiar a flex para disposición horizontal */
+    justify-content: flex-start; /* Alinear hacia la izquierda */
+     transition: transform 0.3s ease;
+     height: 100%;
+}
+.recom{
+    align-self: center;
+    height: 100%;
+}
+
+.Iz, .Der{
+    display: flex;
+    align-items: center;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    justify-content: center;
+}
+.mensaje-sin-prem{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 5vw;
+    text-align: center;
+    line-height: 0.8;
+}
+.premios-container {
+    display: flex;
+    overflow: hidden;
+    width: 100%; /* Ajusta el tamaño según tu diseño */
+}
+.conte {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+    grid-template-rows: 15% 80%;
+}
+p.favo{
+    margin: 1vw;
+}
+.nomPremio {
+    font-family: "Gayathri", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1.1vw;
+    text-align: center;
+    line-height: 0.8;
+}
+
+#imgPremio {
+    height: auto;
+    width: 65%;
+    display: block; /* Asegúrate de que la imagen sea un bloque */
+    margin: 0 auto; /* Centrar la imagen horizontalmente */
+}
+
+.premio {
+    min-width: 20%;
+    width: 20%;
+    height: 90%;
+    padding: 1vw;
+    border-radius: 1.5rem;
+    margin: 0.5vw; /* Espaciado entre premios */
+    font-family: "Gayathri", system-ui;
+    font-weight: 700;
+    font-style: normal;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Añadir sombra para dar profundidad */
+    background-color: #D3E0F9;
+
+}
+.Sele{
+    height: 20%;
+    display: flex;
+    align-items: flex-end;
+}
+.Imal{
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1vw;
+
+}
+.estadoPremio, .estadoImagen{
+   height: 2.5vw;
+   width:auto;
+}
+.estadoImagen{
+    padding-left: 0.5vw;
+}
+
+.Nomel{
+    height: 15%;
+        display: flex;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .modal-content-crear-actividad {
+        width: 70%; /* Ajusta el ancho para pantallas pequeñas */
+        padding: 2vw; /* Añade un padding más amplio */
+        height: fit-content;
+    }
+    .modal-separacion2 {
+        grid-template-columns: 1fr 1fr; /* Unifica las columnas */
+        grid-template-rows: repeat(4, 2fr); /* Ajusta filas automáticamente */
+        gap: 1vw; /* Añade un pequeño espacio entre las secciones */
+    }
+    .spa1{
+        grid-row: 1;
+    }
+    .spa2{
+        grid-row: 2;
+    }
+    .spa3{
+        grid-row: 3;
+    }
+    .spa4{
+        grid-row: 4;
+    }
+    #opcionesTipo{
+        width: 100%;
+        height:5vw;
+        font-size: 2vw;
+    }
+    #opcionesCategoria{
+        width: 100%;
+        height:5vw;
+        font-size: 2vw;
+    }
+    .input-nuevo-habito {
+        width: 96.5%; /* Asegura que los inputs ocupen todo el ancho disponible */
+        font-size: 2vw; /* Aumenta el tamaño de la fuente para mejorar la legibilidad */
+    }
+
+    .texto-input-nuevo-habito {
+        font-size: 2vw; /* Ajusta el tamaño del texto */
+        margin-bottom: 0.5vw; /* Añade espacio entre el texto y el input */
+    }
+
+    #info-extra {
+        height: 6vw; /* Aumenta la altura del área de texto */
+    }
+
+    /* Ajustes para los botones */
+    .modal-boton1, .modal-boton2 {
+        width: 100%; /* Asegura que los botones ocupen todo el ancho disponible */
+        margin: 2vw; /* Añade espacio entre los botones */
+    }
+
+    #mandarFormsNuevaActividad, #cerrarModalBtn {
+        width: 100%;
+        font-size: 2vw; /* Ajusta el tamaño del texto en los botones */
+    }
+    #p-nuevo-habito-tit{
+        font-size: 4vw;
+    }
+    .input-icon-number-container{
+        display: flex;
+        flex-direction: row;
+    }
+    .error-form-nuevo-habito{
+        font-size: 2vw;
+    }
+}
+.agregarHijo{
+    border-radius: 100px;
+    border: none;
+    background-color: var(--cafecito);
+    width: 2.5em;
+    height: 2.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.agregarHijo:hover{
+    background-color: var(--cafe);
+}
+
+.agregarHijo img{
+    width: 1.4em;
+    height: 1.4em;
+}
+.agregar-hijo-modal-button{
+    font-family: "Gayathri", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    cursor: pointer;
+    position: relative;
+    padding: 10px 24px;
+    font-size: 1rem;
+    color: #879FD4;
+    border: 2px solid #879FD4;
+    border-radius: 34px;
+    background-color: transparent;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+    overflow: hidden;
+}
+
+
+.agregar-hijo-modal-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 50px;
+    height: 50px;
+    border-radius: inherit;
+    scale: 0;
+    z-index: -1;
+    background-color: #879FD4;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.agregar-hijo-modal-button:hover::before {
+    scale: 4;
+}
+
+.agregar-hijo-modal-button:hover {
+    color: white;
+    scale: 1.1;
+    box-shadow: 0 0px 20px #879FD4;
+}
+
+.agregar-hijo-modal-button:active {
+    scale: 1;
+}
+
+/* Estilos de la barra de desplazamiento para Chrome, Edge y Safari */
+.icon-options::-webkit-scrollbar {
+    width: 1vw; /* Ancho de la barra de desplazamiento */
+}
+
+.icon-options::-webkit-scrollbar-track {
+    background: #F3F3F3; /* Color del fondo de la barra de desplazamiento */
+    border-radius: 2rem; /* Bordes redondeados en el track */
+}
+
+.icon-options::-webkit-scrollbar-thumb {
+    background-color: #BA6958; /* Color del pulgar de la barra de desplazamiento */
+    border-radius: 2rem; /* Bordes redondeados en el pulgar */
+    border: 2px solid #F3F3F3; /* Espacio entre el pulgar y el track */
+}
+
+.icon-options::-webkit-scrollbar-thumb:hover {
+    background-color:#DB8978 ; /* Color al pasar el cursor */
+}
+
+.icon-options::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 30px; /* Ajusta el ancho del gradiente */
+    background: linear-gradient(to left, #ffffff, transparent);
+    pointer-events: none; /* Ignora los clics en esta área */
+
+}
+.modalPremio {
+    display: flex;
+    display: none;
+    position: fixed;
+    z-index: 1000000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+   
+}
+
+.modalPremioContent {
+    position: relative;
+    left: 0;
+    top: 0;
+    background-color: #FFEEB1;
+    margin: 0 auto;
+    padding: 20px;
+    padding-bottom: 0px;
+    border: 1px solid #888;
+    width: 65%;
+    display:grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: auto auto;
+     border-radius: 1rem;
+}
+
+.close {
+   color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.imagePremiox{
+    display: grid;
+    grid-auto-rows: min-content 1fr;
+   border-radius: 1.5rem;
+     background-color: #D9D9D9;
+
+}
+.imag{
+justify-self: center;
+border-radius: 1.5rem;
+box-shadow: 0 4px 8px rgba(0,0,0,0.2);  
+height: min-content;
+padding-top: 1vw;
+padding-bottom: 1vw;
+}
+.image-prem{
+    max-width:70%;
+    height: auto;
+    display: flex;
+    align-self: center;
+    justify-self: center;
+    padding: 1vw;
+    min-height: 245px;
+}
+.infodet{
+    margin-left: 1.5vw;
+    display: grid;
+    grid-template-columns: 1fr min-content;
+    
+}
+.infol{
+    display:grid;
+    grid-template-rows: min-content min-content min-content min-content min-content;
+    margin-left:0.5vw;
+}
+.nomP{
+    margin-top: 1vw;
+  font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 4.5vw;
+    line-height: 0.8;
+}
+.nomN{
+  font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2.8vw;
+    line-height: 0.4;
+    margin-bottom: 1vw;
+}
+.tipes{
+    margin-top: 1vw;
+     font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2.8vw;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content min-content;
+    gap:0.3vw;
+    
+    
+}
+.tipe{
+    background-color: #FFC549; 
+    padding:0.5vw; 
+    border-radius:0.8rem;
+    width: 80%;
+    line-height: 1;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    
+}
+.tip{
+    height: min-content;
+    line-height: 0.8;
+    width: 50%;
+}
+.estadosx{
+    margin-top: 2vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content min-content min-content;
+    gap: 0.5vw;
+}
+.estatus{
+    font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2.8vw;
+     grid-column: span 2;
+     line-height: 1;
+}
+.est{
+    display:flex;
+    flex-direction: row;
+    font-family: "Gayathri", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1.5vw;
+    
+}
+.estados{
+    display:flex;
+    align-self: center;
+    margin-left: 1vw;
+    
+}
+.cost{
+     grid-row: span 2;
+     
+}
+.costito{
+    padding: 0.1vw;
+  display: grid;
+  grid-template-columns: 55% 45%;
+ height: 80%;
+    width: 85%;
+    background-color:#BA6958;
+    border-radius: 1rem;  
+}
+.costo{
+    display:flex;
+    align-self: center;
+    justify-self: flex-end;
+    margin-right: 1vw;
+      font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 4.5vw;
+}
+.rams{
+    justify-self: flex-start;
+ align-self: center;
+    margin-left: 1vw;
+
+    
+}
+.ramso{
+    align-self: center;
+}
+.rams img{
+     width: auto;
+    height: 3vw;
+}
+.costoso{
+    justify-self: center;
+    align-self: center;
+    width: 80%;
+    background: white;
+    display: grid;
+    grid-template-columns: 25% 75%;
+    border-radius: 1rem;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+    gap: 1vw;
+    
+}
+.costoso img{
+    margin-left: 1.2vw;
+    height: 3vw;
+    width: auto;
+    margin-top: 0.5vw;
+
+}
+.ramsitas{
+    align-self: center;
+     font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2.8vw;
+}
+.des{
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 80% 20%;
+}
+.desc{
+     font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2.8vw;
+}
+.desce{
+    font-family: "Gayathri", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1.5vw;
+    padding-bottom: 1vw;
+}
+.premio-despleada-ramitas{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+#editarActividadBtn{
+    text-decoration: none;
+    cursor: pointer;
+    color: #566C9F;
+    font-family: "Dongle", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2rem;
+    float: right;
+}

@@ -1,0 +1,421 @@
+:root{
+    --cafe: #885551;
+    --cafecito: #BA6958;
+    --cafecitititito: #F7B9A2;
+    --turquesita: #9FD8CB;
+    --awuita: #879FD4;
+    --azulito: #CFE1FF;
+    --amarillito: #FFDF9B;
+    --verdecito:#52B788;
+    --azul:#879FD4;
+}
+
+.gayathri-thin {
+    font-family: "Gayathri", system-ui;
+    font-weight: 100;
+    font-style: normal;
+}
+
+.gayathri-regular {
+    font-family: "Gayathri", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.gayathri-bold {
+    font-family: "Gayathri", system-ui;
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100vh;
+    width: 250px;
+    background-color: white;
+    padding: 10px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    transition: width 0.3s, height 0.3s, bottom 0.3s;
+    overflow: hidden;
+}
+
+.sidebar.collapsed {
+    width: 70px;
+}
+
+.logo-section, .icon-section, .bottom-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+
+.logo {
+    width: 1.5rem;
+    height: auto;
+}
+
+.icon-section, .bottom-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+    transition: padding 0.3s;
+}
+
+.icon {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+#iconoNavLogo{
+    width: auto;
+    height: 2.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.textNav {
+    color: black;
+    font-size: 22px;
+    white-space: nowrap;
+    transition: display 0.3s, margin 0.3s;
+    font-family: "Gayathri", system-ui;
+    font-weight: 700;
+    font-style: normal;
+    margin: 0 auto;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+
+.sidebar.collapsed .text {
+    display: none;
+}
+
+.sidebar.collapsed .menu-item {
+    padding: 10px 15px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar.collapsed #logoNavbar{
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar.collapsed .menu-item .textNav {
+    display: none;
+}
+
+
+
+.menu-item:hover {
+    background-color: #EDF3FF;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.menu-item:hover .textNav {
+    color: #ADBBE4;
+}
+
+
+@media (max-width: 768px) {
+
+    .sidebar {
+        flex-direction: row;
+        height: auto;
+        width: 100%;
+        bottom: 0;
+        top: auto;
+        padding: 0;
+    }
+
+    .textNav{
+        display: none;
+    }
+
+    .logo-section,
+    .bottom-section {
+        display: none;
+    }
+
+    .icon-section {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .menu-item {
+        flex: 1;
+        justify-content: center;
+        padding: 15px 0;
+    }
+
+    .icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .sidebar.collapsed {
+        width: 100%;
+    }
+
+    .sidebar.collapsed .icon-section {
+        justify-content: space-between;
+        background-color: white;
+    }
+    .sidebar.collapsed .menu-item .icon {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+    }
+    .icon-section {
+        justify-content: space-between;
+        background-color: white;
+        padding: 0px;
+    }
+    .menu-item .icon {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    icon icon1 .icon icon1{
+        background-color: #EDF3FF;
+    }
+
+    #logoNavbar{
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        display: none;
+    }
+    .sidebar.collapsed #logoNavbar{
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        display: none;
+    }
+
+    #div_nav_home{
+        background-color: white;
+    }
+
+
+
+}
+
+@media (max-width: 645px) {
+    .icon {
+        width: 38px;
+        height: 38px;
+    }
+
+    .menu-item {
+        padding: 10px 0;
+    }
+
+    .content {
+        padding: 20px;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+}
+
+@media (min-width:769px) {
+    .content {
+        margin-left: 270px;
+        padding: 20px;
+        padding-left: 40px;
+        height: 100%;
+        overflow-y: auto;
+    }
+    .sidebar.collapsed + .content {
+        margin-left: 90px;
+    }
+
+    .sidebar.collapsed .menu-item .icon {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 0;
+        left: 0;
+    }
+    .sidebar.collapsed #logoNavbar{
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+    }
+
+}
+@media (max-height: 600px) {
+    .sidebar {
+        height: auto;
+        width: 250px; /* Mantener el ancho */
+        overflow-y: hidden; /* Evitar scroll vertical */
+    }
+
+    .icon-section {
+        display: flex;
+        flex-direction: column; /* Mantener los íconos en columna */
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .menu-item {
+        flex: 1;
+        justify-content: center;
+        padding: 10px 0;
+    }
+
+    .icon {
+        width: 35px;
+        height: 35px;
+    }
+
+    .bottom-section {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .sidebar.collapsed {
+        width: 70px;
+        height: auto;
+        overflow-y: hidden;
+    }
+
+    .sidebar.collapsed .icon-section {
+        flex-direction: column;
+    }
+
+    /* Asegurar que los íconos sean visibles en todas las resoluciones pequeñas */
+    .sidebar.collapsed .menu-item {
+        justify-content: center;
+        padding: 8px;
+    }
+
+    .sidebar.collapsed .menu-item .icon {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+
+
+
+.content {
+    padding: 20px;
+    height: 100%;
+    background-color: #EDF3FF;
+}
+
+
+.top-div {
+    display: flex;
+    height: 150px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.section1 {
+    flex: 2;
+    background-color: #3498db;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.section2 {
+    flex: 1;
+    display: flex;
+}
+
+.sub-section1, .sub-section2 {
+    flex: 1;
+    background-color: #2980b9;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ffffff;
+}
+
+.sub-section2 {
+    border-left: 1px solid #ffffff;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+}
+
+.a_nav {
+    text-decoration: none; /* Elimina subrayado */
+    color: inherit; /* Mantiene el color del texto */
+    padding: 0; /* Elimina padding */
+    margin: 0; /* Elimina margin */
+    display: flex; /* Asegura que el enlace no altere el flujo */
+    align-items: center; /* Centra verticalmente */
+    width: 100%; /* Asegura que ocupe el espacio disponible */
+}
+
+#div_nav_home{
+    background-color: #EDF3FF;
+}

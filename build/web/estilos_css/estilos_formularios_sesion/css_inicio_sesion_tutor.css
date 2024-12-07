@@ -1,0 +1,401 @@
+:root{
+    --cafe: #885551;
+    --cafecito: #BA6958;
+    --cafecitititito: #F7B9A2;
+    --turquesita: #9FD8CB;
+    --awuita: #879FD4;
+    --azulito: #CFE1FF;
+    --amarillito: #FFDF9B;
+    --verdecito:#52B788;
+    --azul:#879FD4;
+}
+
+html {
+    font-size: 16px; /* tamaño de fuente base */
+}
+
+@media (max-width: 600px) and (max-height: 800px) {
+    html {
+        font-size: 14px; /* ajuste para pantallas pequeñas con menos altura */
+    }
+}
+
+/* Para pantallas pequeñas (por ejemplo, teléfonos en modo paisaje) */
+@media (max-width: 600px) and (min-height: 801px) {
+    html {
+        font-size: 15px; /* ajuste para pantallas pequeñas con más altura */
+    }
+}
+
+/* Para pantallas medianas (por ejemplo, tabletas en retrato) */
+@media (min-width: 601px) and (max-width: 1024px) and (max-height: 1366px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+/* Para pantallas medianas (por ejemplo, tabletas en paisaje) */
+@media (min-width: 601px) and (max-width: 1024px) and (min-height: 1367px) {
+    html {
+        font-size: 17px;
+    }
+}
+
+/* Para pantallas grandes (por ejemplo, computadoras de escritorio) */
+@media (min-width: 1025px) and (max-height: 800px) {
+    html {
+        font-size: 14px; /* para pantallas grandes pero más bajas */
+    }
+}
+
+/* Para pantallas grandes y altas */
+@media (min-width: 1025px) and (min-height: 801px) {
+    html {
+        font-size: 20px; /* para pantallas grandes y con más altura */
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-wrap: wrap;
+
+}
+.error{
+    font-family: "Gayathri", system-ui;
+    font-weight: 700;
+    font-style: normal;
+    font-size: calc(0.5rem + 0.5vw);
+}
+p {
+    font-family: "Gayathri", system-ui;
+    font-weight: 700;
+    font-style: normal;
+    text-align: center;
+    font-size: calc(1rem + 0.5vw);
+
+}
+u{
+    font-size: calc(0.9rem + 0.5vw);
+}
+#toast {
+    font-family: "Gayathri", system-ui;
+    font-weight: 700;
+    font-style: normal;
+    display: none;
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #EBF9EB;
+    color: black;
+    padding: 15px 15px 15px 60px;
+    border-radius: 5px;
+    z-index: 1000;
+    align-items: center;
+    justify-content: space-between;
+    background-image: url(../../img/equis.svg);
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+}
+
+#toast span {
+    flex: 1;
+    font-size: calc(0.5rem + 0.3vw);
+}
+
+.content {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 0;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Container */
+.container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Izquierda Seccion */
+.izquierda {
+    padding: 0;
+    margin: 0;
+    background-color: var(--cafecitititito);
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+}
+
+.divLogito {
+    height: 10%;
+    width: 100%;
+    padding-left: 3%;
+    display: flex;
+    align-items: center;
+}
+
+.nav__logo {
+    height: 55%;
+    width: auto;
+}
+
+.nav__logo img {
+    height: 100%;
+}
+
+.izquierda_cont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 90%;
+}
+.izquierda_tit{
+    height: fit-content;
+}
+.izquierda_tit p {
+    font-size: calc(1rem + 0.5vw);
+}
+.izquierda_forms{
+    width: 80%;
+}
+.izquierda_forms input{
+    height: 2rem;
+}
+
+/* Textos */
+.Texto_1 {
+    font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    line-height: 1.3;
+    font-style: normal;
+    justify-content: center;
+    text-align: center;
+    margin-top: 5%;
+    font-size: calc(1.4rem + 0.4vw);
+    padding: 0;
+}
+
+.titColorcito {
+    color: var(--cafecito);
+}
+
+.titColorcito2 {
+    color: var(--cafecitititito);
+}
+
+.PagPri {
+    font-size: calc(1.5rem + 0.8vw);
+    line-height: 102%;
+}
+
+.PagPri2 {
+    font-size: calc(1rem + 0.5vw);
+
+}
+
+.Texto_2 {
+    font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    line-height: 0.7;
+    font-style: normal;
+    justify-content: center;
+    text-align: center;
+    margin-top: 3%;
+    font-size: calc(1.4rem + 0.4vw);
+
+}
+
+/* Formulario */
+.castor_form {
+    gap: 10px;
+}
+
+form {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-y: auto;
+}
+
+label {
+    display: block;
+    margin: 0.3rem 0 5px;
+    font-family: "Dongle", sans-serif;
+    text-align: left;
+    font-weight: 700;
+    font-style: normal;
+    font-size: calc(1rem + 0.3vw);
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 12px;
+    border: transparent;
+    font-size: calc(0.5rem + 0.4vw);
+}
+
+input:focus {
+    border-color: transparent;
+    outline: none;
+}
+
+.checkbox-container {
+    margin-top: 0.2rem;
+    display: flex;
+    align-items: center;
+    font-size: calc(0.9rem + 0.3vw);
+}
+
+.checkbox-container input {
+    margin-right: 10px;
+    cursor:pointer;
+    width: calc(1.2rem + 0.4vw);
+    height: calc(1.2rem + 0.4vw);
+}
+#cbox1{
+    border-radius: 20px;
+}
+#cbox1:checked{
+    accent-color: var(--cafecito);
+}
+/* Botón */
+button {
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.item_3_1 {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 5%;
+    margin-bottom: 8%;
+}
+
+.item_3_1 button {
+    font-family: "Dongle", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: calc(1.2rem + 0.5vw);
+    line-height: 0.8;
+    height: auto;
+    width: 80%;
+    color: white;
+    background-color: var(--cafe);
+    padding: 10px;
+    transition: all 0.5s ease-in-out;
+    border-radius: 3rem;
+    border: 0px;
+    margin: 0 auto;
+}
+
+.Comienza:hover {
+    background-color: var(--cafecitititito);
+    color: black;
+}
+
+a.comienza:hover {
+    color: var(--cafecito);
+}
+
+a.comienza {
+    color: var(--cafecitititito);
+}
+
+/* Errores */
+.error {
+    color: red;
+    display: none;
+}
+
+/* Derecha Seccion */
+.derecha {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding-top: 0px;
+    margin: 0px;
+    width: 50%;
+}
+
+.derecha_tit {
+    margin: 10px;
+    padding: 20px;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.divImg {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
+    height: 60%;
+}
+
+#imgCastor {
+    margin: 0 auto;
+    max-height: 90%;
+    height: 85%;
+}
+
+@media (max-width: 760px) {
+    .derecha{
+        display: none;
+    }
+    .izquierda {
+        width: 100%;
+    }
+    .izquierda_cont{
+        height: 100%;
+    }
+    .izquierda_forms{
+        width: 75%;
+    }
+    .PagPri {
+        font-size: 2rem;
+    }
+
+    .PagPri2 {
+        font-size: 1.4rem; 
+    }
+
+    .item_3_1 button {
+        font-size: 1.1rem;
+        width: 80%;
+    }
+}
