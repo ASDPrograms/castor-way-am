@@ -27,6 +27,29 @@
     </head>
     <body>
         <%
+            if (session == null || session.getAttribute("email") == null) {
+                response.sendRedirect("../formularios_sesion/inicio_sesion_tutor.jsp");
+            } else {
+                try {
+                    int idCastor = 0;
+                    Base bd = new Base();
+                    bd.conectar();
+
+                    String email = (String) session.getAttribute("email");
+                    String query = "SELECT * FROM Castor WHERE email = ?";
+                    PreparedStatement pstmt7 = bd.getConn().prepareStatement(query);
+                    pstmt7.setString(1, email);
+                    ResultSet rs = pstmt7.executeQuery();
+
+                    if (rs.next()) {
+                        idCastor = rs.getInt(1);
+                        session.setAttribute("idCastor", idCastor);
+                    }
+                } catch (Exception e) {
+                }
+
+            }
+            
             String nombreHabito = (String) session.getAttribute("nombreHabito");
             String tipoHabito = (String) session.getAttribute("tipoHabito");
             String numRamitas = (String) session.getAttribute("numRamitas");
@@ -96,51 +119,54 @@
         <div class="content">
             <div class="secondary-nav">
                 <div class = "izquierda-secondary-nav">
-                    <h3>Calendario</h3>
+                    <a style="display: flex; padding-bottom: 0;" id="text-tit-act-sec-nav">Calendario</a>
                 </div>
                 <div class = "derecha-secondary-nav">
-                    <a href="#"><img class="icon-noti" src="../img/iconito_notifiNotificacion.svg"></a>
-                    <div class="sec-nav-perfil">
-                        <%                            session = request.getSession(false);
+                    <%                            session = request.getSession(false);
 
-                            if (session != null && session.getAttribute("email") != null) {
-                                String email = (String) session.getAttribute("email");
+                        if (session != null && session.getAttribute("idKit") != null) {
+                            String idKit = (String) session.getAttribute("idKit");
+                            int idKitInt = Integer.parseInt(idKit);                           
+                        try {
+                        Base bd = new Base();
+                            bd.conectar();
 
-                                Base bd = new Base();
-                                try {
-                                    bd.conectar();
-
-                                    String strQ = "select * from Castor where email = ?";
-                                    PreparedStatement pstmt = bd.getConn().prepareStatement(strQ);
-                                    pstmt.setString(1, email);
-                                    ResultSet rs = pstmt.executeQuery();
-
-                                    int idCastor = 0;
-                                    if (rs.next()) {
-                                        idCastor = rs.getInt("idCastor");
-                                    }
-                                    session.setAttribute("idCastor", idCastor);
-                                    String consult = "select * from Castor where idCastor = ?";
-                                    PreparedStatement pstmt2 = bd.getConn().prepareStatement(consult);
-                                    pstmt2.setInt(1, idCastor);
-                                    ResultSet r = pstmt2.executeQuery();
-
-                                    while (r.next()) {
-                        %>
-                        <p class = "second-nav-nombre"><%=rs.getString(3)%></p>
-                        <%
-                                }
-                            } catch (Exception e) {
-                            }
-                        %>
-                        <%
-                            } else {
-                                // Si no hay sesión o no hay correo electrónico en la sesión, redirigir al usuario a la página de inicio de sesión
-                                response.sendRedirect("../formularios_sesion/inicio_sesion_tutor.jsp");
-                            }
-                        %>
-                        <a href="perfil_tutor.jsp"> <img src="../img/icono_Perfil.svg" class = "imgNavSecondary"></a>
+                            String consult2 = "select * from Kit where idKit = ?";
+                            PreparedStatement pstmt5 = bd.getConn().prepareStatement(consult2);
+                            pstmt5.setInt(1, idKitInt);
+                            ResultSet r2 = pstmt5.executeQuery();
+                            while (r2.next()) {
+                    %>
+                    <div style="display: flex;">
+                        <img src="../img/hojaCongelada.svg">
+                        <p class = "second-nav-hojas-congeladas"><%=r2.getString("hojasCongeladas")%></p>
                     </div>
+                    <div style="display: flex;">
+                        <img src="../img/icono_ramita.svg">
+                        <p class = "second-nav-ramitas"><%=r2.getString("ramitas")%></p>
+                    </div>
+                    <%
+                        }
+                    %>
+                    <%
+                        } catch (Exception e) {
+                        }
+                    %>
+                    <%} else {
+                    %>
+                    <div style="display: flex;">
+                        <img src="../img/hojaCongelada.svg" style="flex: 1;">
+                        <p id="texto-hojas-cong-secondary-nav" class = "second-nav-hojas-congeladas"style="flex: 1;">0</p>
+                    </div>
+                    <div style="display: flex;">
+                        <img src="../img/icono_ramita.svg"style="flex: 1;">
+                        <p id="texto-ramitas-secondary-nav" class = "second-nav-ramitas" style="flex: 1;">0</p>
+                    </div>
+                    <%
+                        }
+                    %>
+                    <a id="icono-notificaciones-secondary-nav" href="" style="display: flex;"><img src="../img/iconito_notifiNotificacion.svg" class = "imgNavSecondary"></a>
+                    <a id="icono-perfil-secondary-nav" href="perfil_tutor.jsp" style="display: flex;"> <img src="../img/icono_Perfil.svg" class = "imgNavSecondary"></a>
                 </div>
             </div>
             <div class="top-div">
@@ -153,19 +179,21 @@
                     <p id="rango-fecha">Mes, días, año</p>
                     <button class="semanaVista">
                         <img src="../img/view-semana.svg"/>
-                        <p>Semanal</p>
+                        <p><a href="calendario_semanal_tutor.jsp" style="text-decoration: none; color: black">Semanal</a></p>
                     </button>
                 </div>
+
                 <div id="fechas" class="div-fechas">
-                    <div class="dia"><p>Dom</p></div>
-                    <div class="dia"><p>Lun</p></div>
-                    <div class="dia"><p>Mar</p></div>
-                    <div class="dia"><p>Mié</p></div>
-                    <div class="dia"><p>Jue</p></div>
-                    <div class="dia"><p>Vie</p></div>
-                    <div class="dia"><p>Sáb</p></div>
+                    <div class="dia"><p data-dia="Dom">Dom</p></div>
+                    <div class="dia"><p data-dia="Lun">Lun</p></div>
+                    <div class="dia"><p data-dia="Mar">Mar</p></div>
+                    <div class="dia"><p data-dia="Mié">Mié</p></div>
+                    <div class="dia"><p data-dia="Jue">Jue</p></div>
+                    <div class="dia"><p data-dia="Vie">Vie</p></div>
+                    <div class="dia"><p data-dia="Sáb">Sáb</p></div>
                     <div id="fechas-cont"></div>
                 </div>
+
             </div>
 
             <div class="actividades-div">
@@ -173,22 +201,22 @@
                     <h3>Actividades</h3>
                 </div>
                 <div class="act_cont" id="actCont">
-                <%
-                    session = request.getSession(false);
-                    if (session != null && session.getAttribute("email") != null) {
-                        String email = (String) session.getAttribute("email");
-                        Base bd = new Base();
-                        bd.conectar();
-                        String idKit = request.getParameter("idKit");
-                        if (idKit != null && !idKit.isEmpty()) {
-                            session.setAttribute("idKit", idKit); // Guardar el idKit en la sesión
-                        } else {
-                            idKit = (String) session.getAttribute("idKit"); // Usar el idKit de la sesión si no se pasó uno nuevo
-                        }
+                    <%
+                        session = request.getSession(false);
+                        if (session != null && session.getAttribute("email") != null) {
+                            String email = (String) session.getAttribute("email");
+                            Base bd = new Base();
+                            bd.conectar();
+                            String idKit = request.getParameter("idKit");
+                            if (idKit != null && !idKit.isEmpty()) {
+                                session.setAttribute("idKit", idKit); // Guardar el idKit en la sesión
+                            } else {
+                                idKit = (String) session.getAttribute("idKit"); // Usar el idKit de la sesión si no se pasó uno nuevo
+                            }
 
-                        if (idKit == null || idKit.isEmpty()) {
-                %>
-                
+                            if (idKit == null || idKit.isEmpty()) {
+                    %>
+
                     <div class="mensaje-sin-seleccion" id="div-conrainer-img-hijono-seleccionado">
                         <div  id="div-conrainer-img-hijono-seleccionado-img">
                             <img src="../img/Castor.svg" alt="Seleccionar usuario" id="img-hijo-no-seleccionado">
@@ -227,12 +255,7 @@
                                 java.util.Date parsedDate = sdf.parse(fechaConsulta);
                                 java.sql.Date fechaSeleccionada = new java.sql.Date(parsedDate.getTime());
                                 
-                                //java.util.Date parsedDate2 = sdf.parse(fechaGuardada);
-                                //java.sql.Date fechaInicioSemana = new java.sql.Date(parsedDate2.getTime());
-
-                                //session.setAttribute("fechaInicioSemana", fechaInicioSemana); //viendo si puedo guardar la fecha de inicio
-                                
-                                String query = "SELECT * FROM actividad WHERE idKit = ?";
+                                String query = "SELECT * FROM actividad WHERE idKit = ? ORDER BY horaInicioHabito ASC";
 
                                 PreparedStatement pstmt3 = null;
                                 ResultSet rs2 = null;
@@ -253,13 +276,17 @@
                                         String rutaImagenHabitoO = rs2.getString("rutaImagenHabito");
                                         String numRamitasO = rs2.getString("numRamitas");
                                         String infoExtraHabitoO = rs2.getString("infoExtraHabito");
+                                        String horaInicioHabitoO = rs2.getString("horaInicioHabito");
+                                        String horaFinHabitoO = rs2.getString("horaFinHabito");
                         %>
                         <script>
                             actividades['<%= idActividadO%>'] = {
                                 nombre: '<%= nombreHabitoO%>',
                                 imagen: '<%= rutaImagenHabitoO%>',
                                 ramitas: '<%= numRamitasO%>',
-                                infoExtra: '<%= infoExtraHabitoO%>'
+                                infoExtra: '<%= infoExtraHabitoO%>',
+                                horaInicio: '<%= horaInicioHabitoO%>',
+                                horaFin: '<%= horaFinHabitoO%>'
                             };
                         </script>
                         <%
@@ -407,6 +434,7 @@
 
                                 </div>
                             </div>
+
                         </div>
                         <%
                                             break;
@@ -432,6 +460,14 @@
                             <img src="../img/Castor.svg" alt="Seleccionar usuario" id="img-hijo-no-seleccionado">
                         </div>
                     </div>
+                    <div id="infoModal" class="modalInfo">
+                        <div class="modal-info-content">
+                            <span class="close-btn" id="cerrarModal">&times;</span>
+                            <div id="info-actContent">
+                                
+                            </div>
+                        </div>
+                    </div>
                     <%                                    } catch (Exception e) {
                                         e.printStackTrace();
                                     } finally {
@@ -449,226 +485,247 @@
                         }
                     %>
                 </div>
-                <div class = "contenedor-contenido-abajo">
-                        <div class="container-wrapper" id="container-wrapper">
-                            <div class = "div-container-table-scroll">
-                                <table class="tabla">
-                                    <tr>
-                                        <%
-                                            PreparedStatement pstmt7 = null;
-                                            ResultSet rs = null;
-                                            PreparedStatement pstmt8 = null;
-                                            ResultSet rs2 = null;
-                                            PreparedStatement pstmt9 = null;
-                                            ResultSet rs3 = null;
-                                            String email = (String) session.getAttribute("email");
+                </div>
+                </div>
+                <!--<div class = "contenedor-contenido-abajo">  -->
+                    <div class="container-wrapper" id="container-wrapper">
+            <div class = "div-container-table-scroll">
+                <table class="tabla">
+                    <tr>
+                        <%                                        PreparedStatement pstmt7 = null;
+                            ResultSet rs = null;
+                            PreparedStatement pstmt8 = null;
+                            ResultSet rs2 = null;
+                            PreparedStatement pstmt9 = null;
+                            ResultSet rs3 = null;
+                            String email = (String) session.getAttribute("email");
 
-                                            session = request.getSession(false);
-                                            if (session != null && session.getAttribute("email") != null) {
-                                                pstmt7 = null;
-                                                rs = null;
+                            session = request.getSession(false);
+                            if (session != null && session.getAttribute("email") != null) {
+                                pstmt7 = null;
+                                rs = null;
 
-                                                try {
-                                                    Base bd = new Base();
-                                                    bd.conectar();
+                                try {
+                                    Base bd = new Base();
+                                    bd.conectar();
 
-                                                    String query = "SELECT * FROM Castor WHERE email = ?";
-                                                    pstmt7 = bd.getConn().prepareStatement(query);
-                                                    pstmt7.setString(1, email);
-                                                    rs = pstmt7.executeQuery();
+                                    String query = "SELECT * FROM Castor WHERE email = ?";
+                                    pstmt7 = bd.getConn().prepareStatement(query);
+                                    pstmt7.setString(1, email);
+                                    rs = pstmt7.executeQuery();
 
-                                                    int idCastor = 0;
+                                    int idCastor = 0;
 
-                                                    if (rs.next()) {
-                                                        idCastor = rs.getInt(1);
-                                                    }
+                                    if (rs.next()) {
+                                        idCastor = rs.getInt(1);
+                                    }
 
-                                                    int cont = 0;
+                                    int cont = 0;
 
-                                                    boolean comprobar = false;
-                                                    session = request.getSession(false);
-                                                    if (session == null || session.getAttribute("idKit") == null) {
-                                                        comprobar = true;
-                                                    } else {
-                                                        comprobar = false;
-                                                    }
-                                                    if (comprobar) {
-                                        %>
-                                        <td>
-                                            <div id="container-burbuja-img-text">
-                                                <div class="img-text-container">
-                                                    <img src="../img/icono_Perfil.svg" alt="Imagen de iconito" class="icon-img">
-                                                </div>
-                                                <button class="button-overlay" onclick="toggleBurbujas()">
-                                                    <img src="../img/icono_cambio_hijo.svg" id="imgCambiarHijos">
-                                                </button>
-                                            </div>
-                                        </td>
-                                        <%
-                                        } else {
-                                            String idKitActualizado = (String) session.getAttribute("idKit");
-                                            int idKitActualizadoInt = Integer.parseInt(idKitActualizado);
-
-                                            String queryp = "SELECT * FROM Kit WHERE idKit = ?";
-                                            PreparedStatement pstmtp = bd.getConn().prepareStatement(queryp);
-                                            pstmtp.setInt(1, idKitActualizadoInt);
-                                            ResultSet rsp = pstmtp.executeQuery();
-                                            if (rsp.next()) {
-
-                                        %>
-                                        <td>
-                                            <div id="container-burbuja-img-text">
-                                                <form action="procesa_tutor_calendario.jsp" method="post" style="display: inline;" id="pruebapaber">
-                                                    <input type="text" id="idKit" name="idKit" style="display: none;" value="<%= rsp.getString(1)%>">
-                                                    <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer; height: auto; height: auto; display: flex; align-content: center; align-items: center;">
-                                                        <div class="img-text-container">
-                                                            <img src="<%= rsp.getString(9)%>" alt="Imagen de iconito" class="icon-img">
-                                                        </div>
-                                                        <div class="span-text-container">
-                                                            <span id="span-nombre-burbuja"><%= rsp.getString(4)%></span>
-                                                        </div>
-                                                    </button>
-                                                </form>
-                                                <button class="button-overlay" onclick="toggleBurbujas()">
-                                                    <img src="../img/icono_cambio_hijo.svg" id="imgCambiarHijos">
-                                                </button>
-                                            </div>
-                                        </td>
-                                        <%
-                                                }
-                                            }
-                                            String codPresaMandar = null;
-
-                                            if (idCastor > 0) {
-                                                String query2 = "SELECT * FROM relKitCastor WHERE idCastor = ?";
-                                                pstmt8 = bd.getConn().prepareStatement(query2);
-                                                pstmt8.setInt(1, idCastor);
-                                                rs2 = pstmt8.executeQuery();
-
-                                                while (rs2.next()) {
-                                                    cont++;
-
-                                                    int idKitInt = rs2.getInt(3);
-                                                    String idKitString = String.valueOf(idKitInt);
-
-                                                    String query3 = "SELECT * FROM Kit WHERE idKit = ?";
-                                                    pstmt9 = bd.getConn().prepareStatement(query3);
-                                                    pstmt9.setInt(1, idKitInt);
-                                                    rs3 = pstmt9.executeQuery();
-
-                                                    session = request.getSession(false);
-                                                    if (!idKitString.equals(session.getAttribute("idKit"))) {
-
-                                                        if (rs3.next()) {
-                                                            codPresaMandar = rs3.getString(2);
-
-                                        %>
-                                        <td id = "td-burbujas-escondidas">
-                                            <form action="procesa_tutor_calendario.jsp" method="post" style="display: inline;" id="pruebapaber2">
-                                                <input type="text" id="idKit" name="idKit" value="<%= rs3.getString(1)%>" style="display: none;">
-                                                <button type="submit" class="icon-button" style="background: none; border: none; padding: 0; cursor: pointer; display: flex; align-items: center;">
-                                                    <div class="img-text-container">
-                                                        <img src="<%= rs3.getString(9)%>" alt="Imagen de iconito" class="icon-img">
-                                                    </div>
-                                                    <div class="span-text-container">
-                                                        <span id="span-nombre-burbuja"><%= rs3.getString(4)%></span>
-                                                    </div>
-                                                </button>
-                                            </form>
-                                        </td>
-                                        <%
-                                                    }
-
-                                                }
-                                            }
-                                        %>
-                                        <td id = "td-burbujas-escondidas">
-                                            <div class="burbujas-escondidas" style="display: none;">
-                                                <div class="act_tit" id="hijoadd-div">
-                                                    <div class="contenedor-button-add-actividad">
-                                                        <a style="text-decoration: none;" href="../formularios_sesion/registro_hijo.jsp?returnUrl=<%= request.getRequestURL()%>&codPresa=<%= codPresaMandar != null ? codPresaMandar : ""%>">                                                        <button class="agregarHijo" id="agregarHijo"><img src="../img/icon_add.svg"/></button>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <%
-                                                        rs2.close(); // cerrar rs2
-                                                        pstmt8.close(); // cerrar pstmt2
-                                                        rs3.close(); // cerrar rs3
-                                                        pstmt7.close(); // cerrar pstmt3
-                                                    }
-
-                                                } catch (Exception e) {
-                                                    e.printStackTrace();
-                                                } finally {
-                                                    if (rs != null) try {
-                                                        rs.close();
-                                                    } catch (SQLException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                    if (pstmt7 != null) try {
-                                                        pstmt7.close();
-                                                    } catch (SQLException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                    if (rs2 != null) try {
-                                                        rs2.close();
-                                                    } catch (SQLException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                    if (pstmt8 != null) try {
-                                                        pstmt8.close();
-                                                    } catch (SQLException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                    if (rs3 != null) try {
-                                                        rs3.close();
-                                                    } catch (SQLException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                    if (pstmt9 != null) try {
-                                                        pstmt9.close();
-                                                    } catch (SQLException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                    // Cerrar conexión si es necesario
-                                                }
-                                            }
-                                        %>
-
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-
-                        <%
-                            String idKit = (String) session.getAttribute("idKit");
+                                    boolean comprobar = false;
+                                    session = request.getSession(false);
+                                    if (session == null || session.getAttribute("idKit") == null) {
+                                        comprobar = true;
+                                    } else {
+                                        comprobar = false;
+                                    }
+                                    if (comprobar) {
                         %>
-                        <div class="act_tit">
-                            <div class="contenedor-button-add-actividad">
-                                <button class="crearAct_Btn" id="crearActBtn"><img src="../img/icon_add.svg"/></button>
+                        <td>
+                            <div id="container-burbuja-img-text">
+                                <div class="img-text-container">
+                                    <img src="../img/icono_Perfil.svg" alt="Imagen de iconito" class="icon-img">
+                                </div>
+                                <button class="button-overlay" onclick="toggleBurbujas()">
+                                    <img src="../img/icono_cambio_hijo.svg" id="imgCambiarHijos">
+                                </button>
                             </div>
-                        </div>
+                        </td>
+                        <%
+                        } else {
+                            String idKitActualizado = (String) session.getAttribute("idKit");
+                            int idKitActualizadoInt = Integer.parseInt(idKitActualizado);
 
-                        <script>
-                            // Obtenemos el botón por su ID
-                            const button = document.getElementById('crearActBtn');
+                            String queryp = "SELECT * FROM Kit WHERE idKit = ?";
+                            PreparedStatement pstmtp = bd.getConn().prepareStatement(queryp);
+                            pstmtp.setInt(1, idKitActualizadoInt);
+                            ResultSet rsp = pstmtp.executeQuery();
+                            if (rsp.next()) {
 
-                            <% if (idKit == null) { %>
-                            // Si idKit es null, deshabilitamos y ocultamos el botón
-                            button.disabled = true;
-                            button.style.display = "none";
-                            <% } else { %>
-                            // Si idKit tiene un valor, habilitamos el botón
-                            button.disabled = false;
-                            <% } %>
-                        </script>
+                        %>
+                        <td>
+                            <div id="container-burbuja-img-text">
+                                <form action="procesa_tutor_calendario.jsp" method="post" style="display: inline;" id="pruebapaber">
+                                    <input type="text" id="idKit" name="idKit" style="display: none;" value="<%= rsp.getString(1)%>">
+                                    <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer; height: auto; height: auto; display: flex; align-content: center; align-items: center; position: relative; z-index: 7000;">
+                                        <div class="img-text-container">
+                                            <img src="<%= rsp.getString(9)%>" alt="Imagen de iconito" class="icon-img">
+                                        </div>
+                                        <div class="span-text-container">
+                                            <span id="span-nombre-burbuja"><%= rsp.getString(4)%></span>
+                                        </div>
+                                    </button>
+                                </form>
+                                <button class="button-overlay" onclick="toggleBurbujas()">
+                                    <img src="../img/icono_cambio_hijo.svg" id="imgCambiarHijos">
+                                </button>
+                            </div>
+                        </td>
+                        <%
+                                }
+                            }
 
+                            if (idCastor > 0) {
 
+                                String query2 = "SELECT * FROM relKitCastor WHERE idCastor = ?";
+                                pstmt8 = bd.getConn().prepareStatement(query2);
+                                pstmt8.setInt(1, idCastor);
+                                rs2 = pstmt8.executeQuery();
 
-                    </div>
+                                while (rs2.next()) {
+                                    cont++;
+
+                                    int idKitInt = rs2.getInt(3);
+                                    String idKitString = String.valueOf(idKitInt);
+
+                                    String query3 = "SELECT * FROM Kit WHERE idKit = ?";
+                                    pstmt9 = bd.getConn().prepareStatement(query3);
+                                    pstmt9.setInt(1, idKitInt);
+                                    rs3 = pstmt9.executeQuery();
+
+                                    session = request.getSession(false);
+                                    if (!idKitString.equals(session.getAttribute("idKit"))) {
+
+                                        if (rs3.next()) {
+
+                        %>
+                        <td id = "td-burbujas-escondidas">
+                            <form action="procesa_tutor_calendario.jsp" method="post" style="display: inline;" id="pruebapaber2">
+                                <input type="text" id="idKit" name="idKit" value="<%= rs3.getString(1)%>" style="display: none;">
+                                <button type="submit" class="icon-button" style="background: none; border: none; padding: 0; cursor: pointer; display: flex; align-items: center; position: relative; z-index: 100000;">
+                                    <div class="img-text-container">
+                                        <img src="<%= rs3.getString(9)%>" alt="Imagen de iconito" class="icon-img">
+                                    </div>
+                                    <div class="span-text-container">
+                                        <span id="span-nombre-burbuja"><%= rs3.getString(4)%></span>
+                                    </div>
+                                </button>
+                            </form>
+                        </td>
+                        <%
+                                    }
+
+                                }
+                            }
+                        %>
+                        <td id = "td-burbujas-escondidas">
+                            <div class="burbujas-escondidas" style="display: none;">
+                                <div class="contenedor-button-add-actividad">
+                                    <%
+                                        String codPresaMandar = "hola";
+                                        String emailModal = "email";
+                                        session = request.getSession(false);
+                                        if (session != null && session.getAttribute("email") != null) {
+                                            emailModal = (String) session.getAttribute("email");
+                                        }
+                                        Base bdModalFormu = new Base();
+                                        try {
+                                            bdModalFormu.conectar();
+                                            String sqlModal = "SELECT * FROM Castor WHERE email = ?";
+
+                                            PreparedStatement psConectionModal = bdModalFormu.getConn().prepareStatement(sqlModal);
+                                            psConectionModal.setString(1, emailModal);
+                                            ResultSet rsModal = psConectionModal.executeQuery();
+                                            if (rsModal.next()) {
+                                                codPresaMandar = rsModal.getString(2);
+                                            }
+                                        } catch (SQLException e) {
+                                            e.printStackTrace();
+                                        }
+                                    %>
+                                    <a style="text-decoration: none;" href="../formularios_sesion/registro_hijo.jsp?returnUrl=<%= request.getRequestURL()%>&codPresa=<%= codPresaMandar != null ? codPresaMandar : ""%>">  
+                                        <button class="agregarHijo" id="agregarHijo"><img src="../img/icon_add.svg"/></button>
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                        <%
+                                        rs2.close(); // cerrar rs2
+                                        pstmt8.close(); // cerrar pstmt2
+                                        rs3.close(); // cerrar rs3
+                                        pstmt7.close(); // cerrar pstmt3
+                                    }
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                } finally {
+                                    if (rs != null) try {
+                                        rs.close();
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
+                                    }
+                                    if (pstmt7 != null) try {
+                                        pstmt7.close();
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
+                                    }
+                                    if (rs2 != null) try {
+                                        rs2.close();
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
+                                    }
+                                    if (pstmt8 != null) try {
+                                        pstmt8.close();
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
+                                    }
+                                    if (rs3 != null) try {
+                                        rs3.close();
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
+                                    }
+                                    if (pstmt9 != null) try {
+                                        pstmt9.close();
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
+                                    }
+                                    // Cerrar conexión si es necesario
+                                }
+                            }
+                        %>
+
+                    </tr>
+                </table>
             </div>
+        </div>
+
+        <%
+            String idKit = (String) session.getAttribute("idKit");
+        %>
+        <div class="act_tit">
+            <div class="contenedor-button-add-actividad">
+                <button class="crearAct_Btn" id="crearActBtn"><img src="../img/icon_add.svg"/></button>
+            </div>
+        </div>
+
+        <script>
+            // Obtenemos el botón por su ID
+            const button = document.getElementById('crearActBtn');
+
+            <% if (idKit == null) { %>
+            // Si idKit es null, deshabilitamos y ocultamos el botón
+            button.disabled = true;
+            button.style.display = "none";
+            <% } else { %>
+            // Si idKit tiene un valor, habilitamos el botón
+            button.disabled = false;
+            <% } %>
+        </script>
+
+
+
+                <!--</div>-->
+            
             <%
                 // Iniciar sesión
                 session = request.getSession(false);
@@ -737,12 +794,12 @@
                 } else {
                 }
             %>
-        </div>
+        
 
         <div id="modalCrearActividad" class="modal-crear-actividad">
             <div class="modal-content-crear-actividad">
-                <form action="formulario_procesa_tutor_calendario.jsp" method="post" id="formulario-nuevo-habito">
-
+                <form action="formulario_procesa_tutor_calendario.jsp" method="post" id="formulario-nuevo-habito" style="width: auto; height: 100%;">
+                    <input id="idActividadEditarActividad" name="idActividadEditarActividad" type="hidden">
                     <div class="modal-titulo">
                         <p id="p-nuevo-habito-tit">Nuevo hábito</p>
                     </div>
@@ -753,8 +810,8 @@
                             <div class="options-nombre" id="options-nombre">
                                 <div class="category-nombres">Hábitos de Salud</div>
                                 <div data-value="Comer frutas y verduras" class="text-options-nombre-habito" onclick="llenarForm('Comer frutas y verduras')">Comer frutas y verduras</div>
-                                <div data-value="Beber agua" class="text-options-nombre-habito">Beber agua</div>
-                                <div data-value="Hacer ejercicio" class="text-options-nombre-habito">Hacer ejercicio</div>
+                                <div data-value="Beber agua" class="text-options-nombre-habito" onclick="llenarForm('Beber agua')">Beber agua</div>
+                                <div data-value="Hacer ejercicio" class="text-options-nombre-habito" onclick="llenarForm('Hacer ejercicio')">Hacer ejercicio</div>
                                 <div data-value="Cepillarse los dientes" class="text-options-nombre-habito">Cepillarse los dientes</div>
                                 <div data-value="Mantener higiene personal" class="text-options-nombre-habito">Mantener higiene personal</div>
                                 <div data-value="Dormir lo necesario" class="text-options-nombre-habito">Dormir lo necesario</div>
@@ -858,8 +915,12 @@
                                     <tr>
                                         <td class="td-iconos-form-habito"><img src="../img/iconos_formularios/pizarron.png" class="icon-option" data-icon="pizarron"></td>
                                         <td class="td-iconos-form-habito"><img src="../img/iconos_formularios/tachuela.png" class="icon-option" data-icon="tachuela"></td>
+                                        <td class="td-iconos-form-habito"><img src="../img/iconos_formularios/pera.png" class="icon-option" data-icon="pera"></td>
                                     </tr>
-
+                                    <tr>
+                                        <td class="td-iconos-form-habito"><img src="../img/iconos_formularios/agua.png" class="icon-option" data-icon="agua"></td>
+                                        <td class="td-iconos-form-habito"><img src="../img/iconos_formularios/pesa.png" class="icon-option" data-icon="pesa"></td>
+                                    </tr>
 
                                 </table>
                             </div>

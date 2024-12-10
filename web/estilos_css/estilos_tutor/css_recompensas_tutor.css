@@ -1861,3 +1861,371 @@ padding-bottom: 1vw;
     font-size: 2rem;
     float: right;
 }
+
+
+/*Estilos nav corregido*/
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100vh;
+    width: 250px;
+    background-color: white;
+    padding: 10px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    transition: width 0.3s, height 0.3s, bottom 0.3s;
+    overflow: hidden;
+}
+
+.sidebar.collapsed {
+    width: 70px;
+}
+
+.logo-section, .icon-section, .bottom-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+
+.logo {
+    width: 1.5rem;
+    height: auto;
+}
+
+.icon-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.bottom-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+    padding-top: 0;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+    transition: padding 0.3s;
+        justify-content: flex-start;
+}
+
+.icon {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+#iconoNavLogo{
+    width: auto;
+    height: 2.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.textNav {
+    color: black;
+    font-size: 22px;
+    white-space: nowrap;
+    transition: display 0.3s, margin 0.3s;
+    font-family: "Gayathri", system-ui;
+    font-weight: 700;
+    font-style: normal;
+    margin: 0 auto;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+
+.sidebar.collapsed .text {
+    display: none;
+}
+
+.sidebar.collapsed .menu-item {
+    padding: 10px 15px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar.collapsed #logoNavbar{
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar.collapsed .menu-item .textNav {
+    display: none;
+}
+
+
+
+.menu-item:hover {
+    background-color: #EDF3FF;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.menu-item:hover .textNav {
+    color: #ADBBE4;
+}
+
+
+@media (max-height: 600px) {
+    .sidebar {
+        height: 100vh;
+        width: 250px; /* Mantener el ancho */
+        overflow-y: hidden; /* Evitar scroll vertical */
+    }
+
+    .icon-section {
+        display: flex;
+        flex-direction: column; /* Mantener los íconos en columna */
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .menu-item {
+        flex: 1;
+        justify-content: center;
+        padding: 10px 0;
+    }
+
+    .icon {
+        width: 35px;
+        height: 35px;
+    }
+
+    .bottom-section {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .sidebar.collapsed {
+        width: 70px;
+        height: auto;
+        overflow-y: hidden;
+    }
+
+    .sidebar.collapsed .icon-section {
+        flex-direction: column;
+    }
+
+    /* Asegurar que los íconos sean visibles en todas las resoluciones pequeñas */
+    .sidebar.collapsed .menu-item {
+        justify-content: center;
+        padding: 8px;
+    }
+
+    .sidebar.collapsed .menu-item .icon {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+@media (max-width: 768px) {
+.sidebar {
+    display:block;
+        flex-direction: row; /* Cambiar a fila */
+        height: auto; /* Ajustar la altura para móviles */
+        width: 100%; /* Tomar todo el ancho de la pantalla */
+        bottom: 0; /* Fijar en la parte inferior de la pantalla */
+        top: auto;
+        padding: 0;
+    }
+    .bottom-section {
+        display: none; /* Ocultar toda la sección inferior */
+    }
+
+    .menu-item.toggle {
+        display: none; /* Ocultar botones individuales */
+    }
+
+    .icon-section {
+        flex-direction: row; /* Distribuir los íconos en fila */
+        justify-content: space-between; /* Espaciarlos de manera uniforme */
+        align-items: center;
+        width: 100%;
+    }
+
+    .sidebar {
+        flex-direction: row;
+        height: auto;
+        width: 100%;
+        bottom: 0;
+        top: auto;
+        padding: 0;
+    }
+
+    .textNav{
+        display: none;
+    }
+
+    .logo-section,
+    .bottom-section {
+        display: none;
+    }
+
+    .menu-item {
+        flex: 1;
+        justify-content: center;
+        padding: 15px 0;
+    }
+
+    .icon {
+width: auto;
+        height: 5vw;
+    }
+
+    .sidebar.collapsed {
+        width: 100%;
+    }
+
+    .sidebar.collapsed .icon-section {
+        justify-content: space-between;
+        background-color: white;
+    }
+    .sidebar.collapsed .menu-item .icon {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+    }
+    .icon-section {
+        justify-content: space-between;
+        background-color: white;
+        padding: 0px;
+    }
+    .menu-item .icon {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    icon icon1 .icon icon1{
+        background-color: #EDF3FF;
+    }
+
+    #logoNavbar{
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        display: none;
+    }
+    .sidebar.collapsed #logoNavbar{
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        display: none;
+    }
+    .icon-section{
+        display:flex;
+        flex-direction: row;
+    }
+
+    #div_nav_home{
+        background-color: white;
+    }
+
+
+
+}
+
+@media (max-width: 645px) {
+ 
+
+    .menu-item {
+        padding: 10px 0;
+    }
+
+    .content {
+        padding: 20px;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+}
+
+@media (min-width:769px) {
+    .content {
+        margin-left: 270px;
+        padding: 20px;
+        padding-left: 40px;
+        height: 100%;
+        overflow-y: auto;
+    }
+    .sidebar.collapsed + .content {
+        margin-left: 90px;
+    }
+
+    .sidebar.collapsed .menu-item .icon {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 0;
+        left: 0;
+    }
+    .sidebar.collapsed #logoNavbar{
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+    }
+    
+
+}
+
+.content {
+    padding: 1vw;
+    background-color: #EDF3FF;
+    border-radius: 1rem;
+    
+    height: 100%;
+    margin-right: 1vw;
+    max-height: fit-content;
+    overflow: auto;
+
+}
+@media (max-width:768px){
+    .div-container-table-scroll{
+        display: none;
+    }
+}

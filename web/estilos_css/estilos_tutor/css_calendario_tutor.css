@@ -28,21 +28,21 @@
     font-style: normal;
 }
 .dongle-light {
-  font-family: "Dongle", sans-serif;
-  font-weight: 300;
-  font-style: normal;
+    font-family: "Dongle", sans-serif;
+    font-weight: 300;
+    font-style: normal;
 }
 
 .dongle-regular {
-  font-family: "Dongle", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+    font-family: "Dongle", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .dongle-bold {
-  font-family: "Dongle", sans-serif;
-  font-weight: 700;
-  font-style: normal;
+    font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
 }
 
 
@@ -383,10 +383,10 @@ h3{
 }
 
 .content {
-    padding: 1.2rem;
+    padding: 0;
     height: 100%;
     background-color: #EDF3FF;
-    
+
 }
 
 .menu-item {
@@ -407,13 +407,17 @@ h3{
 #div_nav_home{
     background-color: #EDF3FF;
 }
+
 .secondary-nav {
     display: flex;
     align-items: center;
     margin-top: 0;
+    position: sticky;
     top: 0;
+    z-index: 100;
     background-color: transparent;
     height: 3em;
+    height: auto;
 }
 
 .izquierda-secondary-nav{
@@ -421,23 +425,41 @@ h3{
     font-family: "Gayathri", system-ui;
     font-weight: 400;
     font-style: normal;
+    font-size: 2rem;
+    height: auto;
 }
 
 
 .derecha-secondary-nav{
-    width: fit-content;
     display: flex;
-    justify-content: space-between;
-    align-content: center;
-    margin-left: auto;
-    font-family: "Dongle", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-    font-size: 2em;
+    align-items: center;
+    width: 100%;
+    justify-content: end;
 }
-.icon-noti{
-    height: 1.7rem;
-    width: auto;
+
+@media (max-width: 800px) {
+    .derecha-secondary-nav{
+        display: flex;
+        margin: 0 auto;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+    }
+    .izquierda-secondary-nav{
+        display: none;
+    }
+    #icono-notificaciones-secondary-nav{
+        padding: 0;
+    }
+    #icono-perfil-secondary-nav{
+        padding: 0;
+    }
+    #texto-hojas-cong-secondary-nav{
+        padding: 0;
+    }
+    #texto-ramitas-secondary-nav{
+        padding: 0;
+    }
 }
 .sec-nav-perfil{
     display: flex;
@@ -448,16 +470,65 @@ h3{
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 5px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.secondary-nav {
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: #EDF3FF;
+    height: 3.3em;
+    height: auto;
+    width: 100%;
+}
+
+.izquierda-secondary-nav{
+    max-width: 60%;
+    font-family: "Gayathri", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2.2rem;
+}
+
+.sec-nav-perfil{
+    display: flex;
+}
+
+.second-nav-hojas-congeladas{
+    color: black;
+    padding: 10px 20px;
+    border-radius: 5px;
     transition: background-color 0.3s;
     margin-top: auto;
     margin-bottom: auto;
-    display: flex;
-    align-items: center;
+    color: #21B3D3;
+    padding-left: 5px;
+    font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2rem;
 }
 
-.secondary-nav a:hover {
-    background-color: lightgray;
+.second-nav-ramitas{
+    color: black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: #664126;
+    padding-left: 5px;
+    font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2rem;
 }
+
 .top-div {
     display: flex;
     height: 20%;
@@ -467,17 +538,18 @@ h3{
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
+    padding: 0 25px;
 }
 
 .nav-calendar {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  width: 100%;
-  font-family: "Dongle", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 2.4em;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 100%;
+    font-family: "Dongle", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2.4em;
 }
 .nav-calendar p{
     margin: 0;
@@ -494,73 +566,73 @@ h3{
     font-size: 0.5em;
 }
 .btnNav {
-  margin: 0 10px;
-  background: none;
-  border: none;
+    margin: 0 10px;
+    background: none;
+    border: none;
 }
 
 .div-fechas {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 100%;
-  background-color: #D1E0FF;
-  max-height: 70%;
-  border-radius: 20px;
-  box-sizing: border-box;
-  
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #D1E0FF;
+    max-height: 70%;
+    border-radius: 20px;
+    box-sizing: border-box;
+
 }
 
 .dia{
-  width: calc(100% / 7);
-  text-align: center;
-  height: 50%;
+    width: calc(100% / 7);
+    text-align: center;
+    height: 50%;
 }
 .dia p{
-  font-family: "Dongle", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  font-size: calc(2.5em + 0.2vh);
-  margin: 0;
+    font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: calc(2.5em + 0.2vh);
+    margin: 0;
 }
 
 #fechas-cont {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  height: 50%;
-  box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 50%;
+    box-sizing: border-box;
 }
 .div-fechas, .dia, .fecha {
     box-sizing: border-box;
 }
 
 .fecha {
-  font-family: "Dongle", sans-serif;
-  font-weight: 300;
-  font-style: normal;
-  width: calc(100% / 7);
-  text-align: center;
-  height: 80%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    font-family: "Dongle", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    width: calc(100% / 7);
+    text-align: center;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .Btnfecha{
     font-family: "Dongle", sans-serif;
-  font-weight: 300;
-  font-style: normal;
-  font-size: calc(2.5em + 0.2vh);
-  background: none;
-  border: none;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    font-weight: 300;
+    font-style: normal;
+    font-size: calc(2.5em + 0.2vh);
+    background: none;
+    border: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .fecha-seleccionada {
     font-weight: 400;
-    background: #c5d7fb;
+    background: #b5c5e3;
     width: 50%;
     border-radius: 20px;
 }
@@ -570,7 +642,7 @@ h3{
     border-radius: 20px;
 }
 button {
-  cursor: pointer;
+    cursor: pointer;
 }
 .semanaVista{
     display: flex;
@@ -581,7 +653,8 @@ button {
     justify-content: center;
     font-size: 0.5em;
 }
-.semanaVista img{;
+.semanaVista img{
+    ;
     height: calc(1em + 0.2vh);
     margin-right: 5px;
 }
@@ -619,9 +692,10 @@ button {
     color:var(--cafe);
 }
 .actividades-div{
-    height: calc(100% - 20% - 5.2em);
+    height: calc(100% - 20% - 6.2em);
     display: flex;
     flex-direction: column;
+    padding: 0 25px;
 }
 .act_tit2{
     display: flex;
@@ -635,9 +709,15 @@ button {
     margin: 0;
 }
 .act_tit{
-    height: 100%;
-    display: flex;
+    text-align: center;
+    align-content: center;
     align-items: center;
+    flex: .5;
+    width: auto;
+    position: absolute;
+    z-index: 7000;
+    bottom: 45px;
+    right: 30px;
 }
 .act_cont{
     width: 100%;
@@ -646,6 +726,11 @@ button {
     align-items: center;
     height: 75%;
     overflow-y: auto;
+}
+.act_cont p{
+    font-family: "Gayathri", system-ui;
+    font-weight: 700;
+    font-style: normal;
 }
 .crearAct_Btn{
     border-radius: 100px;
@@ -673,15 +758,15 @@ button {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    
+
 }
 .lista-act::-webkit-scrollbar {
-    height: 100%; 
+    height: 100%;
     width: 8px;
 }
 
 .lista-act::-webkit-scrollbar-thumb {
-    background-color: #BA6958; 
+    background-color: #BA6958;
     border-radius: 4px;
 }
 
@@ -733,14 +818,18 @@ button {
     overflow-y: auto;
     margin: 0;
     padding: 0 5px;
+    font-family: "Gayathri", system-ui;
+    font-weight: 700;
+    font-style: normal;
+    font-size: calc(1.2em - 0.3vw);
 }
 .descAct::-webkit-scrollbar {
-    height: 100%; 
+    height: 100%;
     width: 5px;
 }
 
 .descAct::-webkit-scrollbar-thumb {
-    background-color: var(--cafecito); 
+    background-color: var(--cafecito);
     border-radius: 4px;
 }
 
@@ -754,7 +843,7 @@ button {
 
 
 /*estilos para el seleccionar el user*/
-.abajo{ 
+.abajo{
     box-sizing: border-box;
     flex: .6;
 }
@@ -762,7 +851,7 @@ button {
 .contenedor-contenido-abajo{
     display: flex;
     position: sticky;
-    z-index: 100000;
+    z-index: 5000;
     bottom:15px;
 
 }
@@ -782,6 +871,7 @@ td{
     display: flex;
     align-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 #td-burbujas-escondidas{
@@ -789,13 +879,50 @@ td{
 }
 
 #container-wrapper{
-    flex: 4;
-    z-index: 100000;
-    padding: 25px;
-    overflow-x: auto;
+    flex: .5;
+    z-index: 5000;
+    padding-bottom: 0px;
+    padding-top: 0px;
     border-radius: 5px;
-
+    position: absolute;
+    bottom: 30px;
+    left: 300px;
 }
+    
+#container-wrapper::-webkit-scrollbar {
+    height: 8px; /* Altura de la barra de desplazamiento */
+}
+
+#container-wrapper::-webkit-scrollbar-thumb {
+    background-color: #879FD4; /* Color del pulgar */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+#container-wrapper::-webkit-scrollbar-track {
+    background-color: #f0f0f0; /* Color del fondo de la barra */
+}
+
+#container-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 30px;
+    pointer-events: none;
+}    
+
+@media (max-width: 769px){
+    #container-wrapper{
+        left: 30px;
+        bottom: 100px;
+    }
+    .act_tit{
+        right: 30px;
+        bottom: 115px;
+    }
+}
+
 .img-text-container {
     display: flex;
     align-items: center; /* Centra verticalmente */
@@ -858,22 +985,20 @@ td{
 
 /* Estilo para la tabla */
 .tabla{
-    border-collapse: collapse; /* Para eliminar espacios entre celdas */
-    z-index: 1000; /* Asegúrate de que la tabla esté por encima de otros elementos */
-    position: relative; /* Necesario para el z-index */
+    border-collapse: collapse;
+    z-index: 1000;
+    position: relative;
     border-radius: 30px;
     background: white;
-    margin-bottom: 20px;
 }
 
 @media (max-width: 768px) {
     .tabla{
         border-collapse: collapse; /* Para eliminar espacios entre celdas */
-        z-index: 1000; /* Asegúrate de que la tabla esté por encima de otros elementos */
+        z-index: 5500; /* Asegúrate de que la tabla esté por encima de otros elementos */
         position: relative; /* Necesario para el z-index */
         border-radius: 30px;
         background: white;
-        margin-bottom: 80px;
     }
 }
 
@@ -935,7 +1060,6 @@ td{
 
 .div-container-table-scroll{
     width: 100%;
-    overflow-x: auto;
 }
 
 
@@ -944,7 +1068,6 @@ td{
     display: flex; /* Activar Flexbox */
     justify-content: flex-end; /* Alinear el botón a la derecha horizontalmente */
     align-items: center; /* Centrar el botón verticalmente */
-    margin-right: 30px;
 }
 
 .crearAct_Btn{
@@ -987,9 +1110,9 @@ td{
     background-color: white;
     padding: 20px;
     border: 1px solid #888;
-    width: 900px; /* Puedes ajustar el ancho del modal */
+    width: 900px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px; /* Borde redondeado */
+    border-radius: 10px;
 }
 
 /* Botón para cerrar el modal */
@@ -1239,7 +1362,6 @@ td{
 
 
 
-
 .input-icon-number-container {
     margin: 10px 0;
 }
@@ -1318,8 +1440,6 @@ input[type="number"]:focus {
     justify-content: center;
     position: relative;
 }
-
-
 
 
 #main-input {
@@ -1568,9 +1688,6 @@ input[type="number"]:focus {
     z-index: 10000000;
 }
 
-.td{
-
-}
 .td-iconos-form-habito{
     text-align: center;
 }
@@ -1605,6 +1722,83 @@ input[type="number"]:focus {
 }
 
 
+
+@media (max-width: 1200px){
+    .modal-content-crear-actividad{
+        width: 80%;
+    }
+    .modal-separacion3{
+        display: flex;
+        flex-direction: column;
+    }
+    .container-input-horas-inicio{
+        width: 100%;
+    }
+    #hora-inicio{
+        width: 100%;
+        box-sizing: border-box;
+    }
+    #hora-final{
+        box-sizing: border-box;
+    }
+    #mi-calendario-inicial{
+        width: 100%;
+        box-sizing: border-box;
+    }
+    #mi-calendario-final{
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 830px){
+    .modal-separacion2{
+        flex-direction: column;
+    }
+    #recompensaActividad{
+        width: 100%;
+        box-sizing: border-box;
+    }
+    #opciones{
+        width: 100%;
+        box-sizing: border-box;
+    }
+    #nombreHabito{
+        width: 90%;
+        box-sizing: border-box;
+    }
+}
+@media (max-height: 830px) and (max-width: 900px){
+    .modal-content-crear-actividad{
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        padding-bottom: 20px;
+    }
+    #formulario-nuevo-habito{
+        height: 100%;
+        width: auto;
+        overflow-y: auto;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media (height: 600px) and (width: 1024px){
+    .modal-content-crear-actividad{
+        width: 80%;
+        height: 100%;
+        padding: 0;
+        padding-bottom: 20px;
+    }
+    #formulario-nuevo-habito{
+        height: 100%;
+        width: auto;
+        overflow-y: auto;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
 
 
 .options-nombre {
@@ -1657,7 +1851,7 @@ input[type="number"]:focus {
 }
 
 #div-conrainer-img-hijono-seleccionado-img{
-    height: 80%;
+    height: 60%;
     text-align: center;
     align-content: center;
     align-items: center;
@@ -1787,10 +1981,24 @@ input[type="number"]:focus {
     display: flex;
     align-items: center;
 }
+.actividad-ramitas-horas{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 .actividad-despleada-ramitas{
     display: flex;
     flex-direction: row;
+}
+
+.actividad-desplegada-horas p{
+    font-family: "Dongle", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 1.5rem;
+    margin: 0;
+    color:gray;
 }
 
 .imgRamitaRecompensa-desplegar-actividad{
@@ -1806,6 +2014,9 @@ input[type="number"]:focus {
     font-size: 1.7rem;
     color: #664126;
     margin-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .actividad-desplegada-horario{
@@ -1871,5 +2082,127 @@ input[type="number"]:focus {
 /*para detalles*/
 
 .oculto {
+    display: none;
+}
+.modalInfo{
+    display:none;
+}
+
+@media (max-width: 600px) {
+    #img-hijo-no-seleccionado{
+        height: 70%;
+    }
+    .top-div {
+        height: 15%;
+        padding: 0 15px;
+    }
+    .act_tit2{
+        box-sizing: border-box;
+    }
+    .act_cont{
+        flex-direction: column;
+        box-sizing: border-box;
+    }
+    .nav-calendar{
+        font-size: 2em;
+    }
+    .nav-calendar img{
+        height: 1.4em;
+    }
+    .btnNav {
+        margin: 0 5px;
+    }
+    .actividades-div{
+        height: calc(100% - 15% - 6.2em);
+        padding: 0 20px;
+    }
+    .content{
+        padding: 0;
+    }
+    .dia p, .Btnfecha{
+        font-size: calc(2em + 0.2vh);
+    }
+    #rango-fecha{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .lista-act{
+        width: 100%;
+        max-width: 100%;
+        max-height: 85%;
+    }
+    .info-act{
         display: none;
     }
+    .modalInfo{
+        position: absolute;
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        top: 0;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 10000;
+    }
+    .info-actContent {
+        width: 100%;
+        height: 60%;
+        margin-bottom: 0;
+        margin-top: auto;
+        z-index: 10000;
+    }
+    .modal-info-content{
+        width: 100%;
+        height: 70%;
+        margin-bottom: 0;
+        margin-top: auto;
+        z-index: 10000;
+        background: white;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        padding: 20px;
+        border-radius: 30px 30px 0 0;
+    }
+    .close-btn{
+        margin-left: auto;
+        font-size: 3em;
+    }
+    .close-btn:hover{
+        cursor: pointer;
+    }
+    .actividad-ramitas-horas{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    #info-actContent{
+        overflow-y: hidden;
+    }
+    #info-actContent #text-num-ramitas-despl-acti{
+        font-size: 2.5rem;
+    }
+    #info-actContent .cont-img-icono-ramita-num-ramitas{
+        height: 50px;
+    }
+    #info-actContent .imgRamitaRecompensa-desplegar-actividad {
+        height: 30px;
+    }
+    #info-actContent .imgIconoActividad{
+        height: 70px;
+        width: auto;
+    }
+    .actividad-desplegada-horas p {
+        font-size: 2rem;
+    }
+    .descAct{
+        max-height: 80%;
+        font-size: calc(1.3em - 0.3vw);
+    } 
+    #info-actContent h3{
+        margin-bottom: 0;
+        margin-top: 25px;
+    }
+    .act_cont{
+        justify-content: start
+    }
+}

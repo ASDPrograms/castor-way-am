@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="../estilos_css/estilos_tutor/css_actividades_tutor.css" rel="stylesheet" type="text/css"/>
+        <link href="../estilos_css/estilos_hijo/css_actividades_hijo.css" rel="stylesheet" type="text/css"/>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Gayathri:wght@100;400;700&display=swap" rel="stylesheet">
@@ -54,37 +54,37 @@
             </div>
             <div class="icon-section">
                 <div class="menu-item">
-                    <a href="home_tutor.jsp" class = "a_nav"> 
+                    <a href="home_hijo.jsp" class = "a_nav"> 
                         <img class="icon icon1" src="../img/icono_casita.svg">
                         <span class="textNav">Inicio</span>
                     </a>
                 </div>
                 <div class="menu-item" id = "div_nav_home">
-                    <a href="actividades_tutor.jsp" class = "a_nav">
+                    <a href="actividades_hijo.jsp" class = "a_nav">
                         <img class="icon icon1" src="../img/icono_actividades.svg">
                         <span class="textNav">Actividades</span>
                     </a>
                 </div>
                 <div class="menu-item">
-                    <a class="a_nav" href="calendario_tutor.jsp">
+                    <a class="a_nav" href="calendario_hijo.jsp">
                         <img class="icon icon1" src="../img/icono_calendario.svg">
                         <span class="textNav">Calendario</span>
                     </a>
                 </div>
                 <div class="menu-item">
-                    <a class="a_nav" href="diario_tutor.jsp">
+                    <a class="a_nav" href="diario_hijo.jsp">
                         <img class="icon icon1" src="../img/icono_diario.svg">
                         <span class="textNav">Diario</span>
                     </a>
                 </div>
                 <div class="menu-item">
-                    <a class="a_nav" href="chat_tutor.jsp">
+                    <a class="a_nav" href="chat_hijo.jsp">
                         <img class="icon icon1" src="../img/icono_chat.svg">
                         <span class="textNav">Chat</span>
                     </a>
                 </div>
                 <div class="menu-item">
-                    <a href="recompensas_tutor.jsp" class="a_nav">
+                    <a href="recompensas_hijo.jsp" class="a_nav">
                         <img class="icon icon1" src="../img/icono_recompensa.svg">
                         <span class="textNav">Recompensas</span>
                     </a>
@@ -140,7 +140,7 @@
                     %>
 
                     <a id="icono-notificaciones-secondary-nav" href="" style="display: flex;"><img src="../img/iconito_notifiNotificacion.svg" class = "imgNavSecondary"></a>
-                    <a id="icono-perfil-secondary-nav" href="perfil_tutor.jsp" style="display: flex;"> <img src="../img/icono_Perfil.svg" class = "imgNavSecondary"></a>
+                    <a id="icono-perfil-secondary-nav" href="perfil_hijo.jsp" style="display: flex;"> <img src="../img/icono_Perfil.svg" class = "imgNavSecondary"></a>
                 </div>
             </div>
             <div class="cuerpo-actividades">

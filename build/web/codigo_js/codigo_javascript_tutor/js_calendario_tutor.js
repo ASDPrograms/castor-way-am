@@ -84,16 +84,39 @@ function escribirFechas() {
 
     const anioInicio = primerDia.getFullYear();
     const anioFin = ultimoDia.getFullYear();
-
-    if (mesInicio === mesFin) {
-        rango.textContent = `${mesInicio} ${primerDia.getDate()} - ${ultimoDia.getDate()}, ${primerDia.getFullYear()}`;
-    } else {
-        if (anioFin === anioInicio) {
-            rango.textContent = `${mesInicio} ${primerDia.getDate()} - ${mesFin} ${ultimoDia.getDate()}, ${primerDia.getFullYear()}`;
+    const diasSemanaP = document.querySelectorAll('.dia p');
+    diasSemanaP.forEach(dia => {
+        if (window.innerWidth <= 700) {
+            dia.textContent = dia.getAttribute('data-dia').charAt(0).toUpperCase();
         } else {
-            rango.textContent = `${mesInicio} ${primerDia.getDate()}, ${anioInicio} - ${mesFin} ${ultimoDia.getDate()}, ${anioFin}`;
+            dia.textContent = dia.getAttribute('data-dia');
+        }
+    });
+
+    if (window.innerWidth <= 800) {
+        if (mesInicio === mesFin) {
+            rango.textContent = `${primerDia.toLocaleString("default", {month: "short"})} ${anioInicio}`;
+        } else {
+            if (anioFin === anioInicio) {
+                rango.textContent = `${primerDia.toLocaleString("default", {month: "short"})} - ${ultimoDia.toLocaleString("default", {month: "short"})} ${anioFin}`;
+            } else {
+                rango.textContent = `${primerDia.toLocaleString("default", {month: "short"})} ${anioInicio} - ${ultimoDia.toLocaleString("default", {month: "short"})} ${anioFin}`;
+            }
+        }
+    } else {
+
+        if (mesInicio === mesFin) {
+            rango.textContent = `${mesInicio} ${primerDia.getDate()} - ${ultimoDia.getDate()}, ${primerDia.getFullYear()}`;
+        } else {
+            if (anioFin === anioInicio) {
+                rango.textContent = `${mesInicio} ${primerDia.getDate()} - ${mesFin} ${ultimoDia.getDate()}, ${primerDia.getFullYear()}`;
+            } else {
+                rango.textContent = `${mesInicio} ${primerDia.getDate()}, ${anioInicio} - ${mesFin} ${ultimoDia.getDate()}, ${anioFin}`;
+            }
         }
     }
+
+
     const fechaHoy = new Date();
 
     fechaHoy.setHours(0, 0, 0, 0);
@@ -116,9 +139,9 @@ function escribirFechas() {
         const divDia = document.createElement("div");
         const diaActual = new Date(fechaAct);
         diaActual.setDate(fechaAct.getDate() + i);
-        
+
         diaActual.setHours(0, 0, 0, 0);
-        
+
         divDia.className = "fecha";
         const buttonDia = document.createElement("button");
         buttonDia.className = "Btnfecha";
@@ -136,7 +159,7 @@ function escribirFechas() {
         }
 
         if (
-                 diaActual.getTime() === fechaHoy.getTime()
+                diaActual.getTime() === fechaHoy.getTime()
                 ) {
             divDia.classList.add("fecha-actual");
             buttonDia.classList.add("Btnfecha-actual");
@@ -145,7 +168,6 @@ function escribirFechas() {
         fechasCont.appendChild(divDia);
     }
 }
-
 
 btnPrevio.addEventListener("click", () => {
     fechaAct.setDate(fechaAct.getDate() - 7);
@@ -170,6 +192,7 @@ btnHoy.addEventListener("click", () => {
     sessionStorage.setItem("fechaSeleccionada", fechaGuardada);
     buscarFecha(formatoFecha(diaHoy));
 });
+window.addEventListener('resize', escribirFechas);
 
 escribirFechas();
 
@@ -1285,7 +1308,43 @@ const habitosData = {
 
 // Función para llenar el formulario
 function llenarForm(habito) {
+    console.log("Valor de habito:", habito);
+    const habitosData = {
+        "Comer frutas y verduras": {
+            icon: "../img/iconos_formularios/pera-verde.png",
+            color: "#8AC926",
+            colorInput: "verde",
+            recompensas: 30,
+            tipo: "Salud",
+            repeticiones: "Lunes, Martes, Miércoles, Jueves, Viernes, Sábado, Domingo",
+            info: "Recuerda llevar una alimentación saludable incluyendo frutas y verduras, no olvídes que poco a poco lograremos grandes cosas, te quiero mucho."
+        },
+        "Beber agua": {
+            icon: "../img/iconos_formularios/agua-azul.png",
+            color: "#1982C4",
+            colorInput: "azul",
+            recompensas: 20,
+            tipo: "Salud",
+            repeticiones: "Lunes, Martes, Miércoles, Jueves, Viernes, Sábado, Domingo",
+            info: "Recuerda hidratarte constantemente"
+        },
+        "Hacer ejercicio": {
+            icon: "../img/iconos_formularios/pesa-rojo.png",
+            color: "#FF595E",
+            colorInput: "rojo",
+            recompensas: 50,
+            tipo: "Salud",
+            repeticiones: "Lunes, Miércoles, Viernes, Domingo",
+            info: "Hacer ejercicio es una parte importante para tu salud, los ejercicios trata de buscar unos acorde a tu edad, tú puedes."
+        }
+    };
+
     const data = habitosData[habito];
+
+    if (!data) {
+        console.error(`El hábito "${habito}" no existe en habitosData.`);
+        return;
+    }
 
     if (data) {
         document.getElementById('nombreHabito').value = habito;
@@ -1300,7 +1359,6 @@ function llenarForm(habito) {
         document.getElementById('info-extra').value = data.info;
     }
 }
-;
 
 function showToastIconos() {
     const toast = document.getElementById('toast-iconos');
@@ -1332,33 +1390,100 @@ function validateColorValue() {
     return true;
 }
 
+let idActividadActual = null;
+
+function actualizarVista(contenido) {
+    const modal = document.getElementById("infoModal");
+    const modalContent = document.getElementById("info-actContent");
+    const infoActContent = document.getElementById("info-seleccionada");
+
+    if (window.innerWidth <= 700) {
+
+        modalContent.innerHTML = contenido;
+        modal.style.display = "flex";
+        infoActContent.innerHTML = "";
+        infoActContent.classList.remove("info-actContent-mostrando");
+    } else {
+        infoActContent.classList.add("info-actContent-mostrando");
+        infoActContent.innerHTML = contenido;
+        modal.style.display = "none"; 
+    }
+}
+
 function mostrarInfo(idActividad) {
     const actividad = actividades[idActividad];
+    idActividadActual = idActividad;
 
-
-    console.log(actividad);
     if (actividad) {
         const infoActContent = document.getElementById("info-seleccionada");
-        infoActContent.classList.add('info-actContent-mostrando');
-        infoActContent.innerHTML = `
+        const [horas, minutos] = actividad.horaInicio.split(":");
+        const horaInicio = `${horas}:${minutos}`;
+        const [horas2, minutos2] = actividad.horaFin.split(":");
+        const horaFin = `${horas2}:${minutos2}`;
+        
+        // Crear el contenido de la información
+        const contenido = `
             <img src="${actividad.imagen}" class="imgIconoActividad">
             <h3>${actividad.nombre}</h3>
-            <div class="actividad-despleada-ramitas">
-                <div class="cont-img-icono-ramita-num-ramitas">
-                    <img src="../img/icono_ramita.svg" class="imgRamitaRecompensa-desplegar-actividad">
+            <div class="actividad-ramitas-horas">
+                <div class="actividad-despleada-ramitas">
+                    <div class="cont-img-icono-ramita-num-ramitas">
+                        <img src="../img/icono_ramita.svg" class="imgRamitaRecompensa-desplegar-actividad">
+                    </div>
+                    <div>
+                        <label id="text-num-ramitas-despl-acti">${actividad.ramitas} Ramitas</label>
+                    </div>
                 </div>
-                <div>
-                    <label id="text-num-ramitas-despl-acti">${actividad.ramitas} Ramitas</label>
+                <div class="actividad-desplegada-horas">
+                    <p>${horaInicio} - ${horaFin}</p>
                 </div>
             </div>
             <div class="descAct">
             <p>${actividad.infoExtra}</p>
             </div>
         `;
-    } else {
-
-    }
+        actualizarVista(contenido);
+        
+    } 
 }
+
+const modal = document.getElementById("infoModal");
+window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+const btnCerrarInfo = document.getElementById("cerrarModal");
+btnCerrarInfo.addEventListener("click", function () {
+        modal.style.display = "none";
+});
+
+window.addEventListener("resize", function () {
+        if (idActividadActual !== null) {
+            const actividad = actividades[idActividadActual];
+            const contenido = `
+                <img src="${actividad.imagen}" class="imgIconoActividad">
+                <h3>${actividad.nombre}</h3>
+                <div class="actividad-ramitas-horas">
+                    <div class="actividad-despleada-ramitas">
+                        <div class="cont-img-icono-ramita-num-ramitas">
+                            <img src="../img/icono_ramita.svg" class="imgRamitaRecompensa-desplegar-actividad">
+                        </div>
+                        <div>
+                            <label id="text-num-ramitas-despl-acti">${actividad.ramitas} Ramitas</label>
+                        </div>
+                    </div>
+                    <div class="actividad-desplegada-horas">
+                        <p>${actividad.horaInicio.split(":").slice(0, 2).join(":")} - ${actividad.horaFin.split(":").slice(0, 2).join(":")}</p>
+                    </div>
+                </div>
+                <div class="descAct">
+                <p>${actividad.infoExtra}</p>
+                </div>
+            `;
+            actualizarVista(contenido);
+        }
+    });
 
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('formulario-nuevo-habito').addEventListener('submit', function (event) {

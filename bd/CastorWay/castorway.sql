@@ -129,7 +129,7 @@ idDiario int auto_increment primary key,
 idKit int,
 foreign key (idKit) references Kit(idKit), 
 titulo varchar (50),
-info varchar (700),
+info text,
 imgPrivacidad varchar (50),
 privacidad int,
 imgSentimiento varchar (50),
@@ -157,9 +157,8 @@ create table Chat(
     idCastor int,
     foreign key(idCastor) references Castor(idCastor),
     contenido Text not null,
-    emisor enum('tutor', 'hijo'),
-    fecha date,
-    hora time
+    emisor enum('Tutor', 'Kit'),
+    fechaEnvio TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -202,5 +201,3 @@ VALUES
 -- (7,6,'Pruebita no más 2', 'Salud', '5', '5', NOW(), '2024-10-16', '07:00:00', '08:00:00', 'Verde', 'ruta/a/imagen.png', 'Lunes', 'Recordatorio diario', 'Comenzar el día con energía'),
 -- (7,6,'Pruebita no másx2 2', 'Salud', '5', '5', NOW(), '2024-10-16', '07:00:00', '08:00:00', 'Verde', 'ruta/a/imagen.png', 'Lunes', 'Recordatorio diario', 'Comenzar el día con energía'),
 -- (7,6,'ahiquedóñ sjjss 2', 'Salud', '5', '5', NOW(), '2024-10-12', '07:00:00', '08:00:00', 'Verde', 'ruta/a/imagen.png', 'Lunes', 'Recordatorio diario', 'Comenzar el día con energía');
-
-select * from premios;

@@ -39,329 +39,10 @@ body, html {
     height: 100%;
 }
 
-.sidebar {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    height: 100vh;
-    width: 250px;
-    background-color: white;
-    padding: 10px;
-    position: fixed;
-    left: 0;
-    top: 0;
-    transition: width 0.3s, height 0.3s, bottom 0.3s;
-    overflow: hidden;
-}
-
-.sidebar.collapsed {
-    width: 70px;
-}
-
-.logo-section, .icon-section, .bottom-section {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-    padding: 10px 0;
-}
-
-.logo-section {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-}
-
-
-.logo {
-    width: 1.5rem;
-    height: auto;
-}
-
-.icon-section, .bottom-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
-.menu-item {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 10px;
-    cursor: pointer;
-    transition: padding 0.3s;
-}
-
-.icon {
-    width: 2rem;
-    height: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-}
-
-#iconoNavLogo{
-    width: auto;
-    height: 2.3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-}
-
-.textNav {
-    color: black;
-    font-size: 22px;
-    white-space: nowrap;
-    transition: display 0.3s, margin 0.3s;
-    font-family: "Gayathri", system-ui;
-    font-weight: 700;
-    font-style: normal;
-    margin: 0 auto;
-    margin-left: 10px;
-    display: flex;
-    justify-content: center;
-    justify-items: center;
-}
-
-.sidebar.collapsed .text {
-    display: none;
-}
-
-.sidebar.collapsed .menu-item {
-    padding: 10px 15px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.sidebar.collapsed #logoNavbar{
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.sidebar.collapsed .menu-item .textNav {
-    display: none;
-}
-
-
-
-.menu-item:hover {
-    background-color: #EDF3FF;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.menu-item:hover .textNav {
-    color: #ADBBE4;
-}
-
-
-@media (max-width: 768px) {
-
-    .sidebar {
-        flex-direction: row;
-        height: auto;
-        width: 100%;
-        bottom: 0;
-        top: auto;
-        padding: 0;
-    }
-
-    .textNav{
-        display: none;
-    }
-
-    .logo-section,
-    .bottom-section {
-        display: none;
-    }
-
-    .icon-section {
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
-    }
-
-    .menu-item {
-        flex: 1;
-        justify-content: center;
-        padding: 15px 0;
-    }
-
-    .icon {
-        width: 40px;
-        height: 40px;
-    }
-
-    .sidebar.collapsed {
-        width: 100%;
-    }
-
-    .sidebar.collapsed .icon-section {
-        justify-content: space-between;
-        background-color: white;
-    }
-    .sidebar.collapsed .menu-item .icon {
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: white;
-    }
-    .icon-section {
-        justify-content: space-between;
-        background-color: white;
-        padding: 0px;
-    }
-    .menu-item .icon {
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-    }
-
-    icon icon1 .icon icon1{
-        background-color: #EDF3FF;
-    }
-
-    #logoNavbar{
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        display: none;
-    }
-    .sidebar.collapsed #logoNavbar{
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        display: none;
-    }
-
-    #div_nav_home{
-        background-color: white;
-    }
-
-
-
-}
-
-@media (max-width: 645px) {
-    .icon {
-        width: 38px;
-        height: 38px;
-    }
-
-    .menu-item {
-        padding: 10px 0;
-    }
-
-    .content {
-        padding: 20px;
-        height: 100%;
-        overflow-y: auto;
-    }
-
-}
-
-@media (min-width:769px) {
-    .content {
-        margin-left: 270px;
-        padding: 20px;
-        padding-left: 40px;
-        height: 100%;
-        overflow-y: auto;
-    }
-    .sidebar.collapsed + .content {
-        margin-left: 90px;
-    }
-
-    .sidebar.collapsed .menu-item .icon {
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-left: 0;
-        left: 0;
-    }
-    .sidebar.collapsed #logoNavbar{
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0;
-    }
-
-}
-@media (max-height: 600px) {
-    .sidebar {
-        height: auto;
-        width: 250px; /* Mantener el ancho */
-        overflow-y: hidden; /* Evitar scroll vertical */
-    }
-
-    .icon-section {
-        display: flex;
-        flex-direction: column; /* Mantener los íconos en columna */
-        align-items: center;
-        gap: 10px;
-        width: 100%;
-    }
-
-    .menu-item {
-        flex: 1;
-        justify-content: center;
-        padding: 10px 0;
-    }
-
-    .icon {
-        width: 35px;
-        height: 35px;
-    }
-
-    .bottom-section {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-    }
-
-    .sidebar.collapsed {
-        width: 70px;
-        height: auto;
-        overflow-y: hidden;
-    }
-
-    .sidebar.collapsed .icon-section {
-        flex-direction: column;
-    }
-
-    /* Asegurar que los íconos sean visibles en todas las resoluciones pequeñas */
-    .sidebar.collapsed .menu-item {
-        justify-content: center;
-        padding: 8px;
-    }
-
-    .sidebar.collapsed .menu-item .icon {
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-}
 .Div-Principal{
     display: grid;
     grid-template-columns: 2fr min-content 1fr;
-    height: calc(100% - 48px);
+    height: calc(100% - 78px);
 
 }
 .linea{
@@ -373,16 +54,6 @@ body, html {
 }
 
 
-.content {
-    padding: 1vw;
-    background-color: #EDF3FF;
-    border-radius: 1rem;
-    margin-top: 1vw;
-    height: 100%;
-    margin-right: 1vw;
-    max-height: fit-content;
-
-}
 
 .section1 {
     display: grid;
@@ -467,6 +138,8 @@ body, html {
     text-align: center;
     align-items: center;
     padding-left: 1vw;
+    max-width: max-content;
+    padding-right: 1vw;
 
 }
 .item7 p{
@@ -478,11 +151,10 @@ body, html {
     justify-content: center;
     grid-row: 1 / span 3;
     grid-column: 2;
-    padding-top: 1vw;
 }
 .item8 img{
-    width: auto;
-    height: max-content;
+    width: max-content;
+    height: auto;
 }
 
 
@@ -527,7 +199,7 @@ body, html {
     border-radius: 1.5rem;
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: 8% 65% 17%;
+    grid-template-rows: 8% 82%;
     gap:0.5vw;
     padding: 1.2vw;
     padding-bottom: 0;
@@ -568,19 +240,6 @@ body, html {
     height: auto;
 }
 
-.sub-section1, .sub-section2 {
-    flex: 1;
-    background-color: #2980b9;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #ffffff;
-}
-
-.sub-section2 {
-    border-left: 1px solid #ffffff;
-}
 
 .menu-item {
     display: flex;
@@ -600,6 +259,64 @@ body, html {
 #div_nav_home{
     background-color: #EDF3FF;
 }
+
+/*Estilos del nav*/
+.secondary-nav {
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: #EDF3FF;
+    height: 3.3em;
+    height: auto;
+    width: 100%;
+}
+
+.izquierda-secondary-nav{
+    max-width: 60%;
+    font-family: "Gayathri", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2.2rem;
+}
+
+.sec-nav-perfil{
+    display: flex;
+}
+
+.second-nav-hojas-congeladas{
+    color: black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: #21B3D3;
+    padding-left: 5px;
+    font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2rem;
+}
+
+.second-nav-ramitas{
+    color: black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: #664126;
+    padding-left: 5px;
+    font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2rem;
+}
+
+
 .secondary-nav {
     display: flex;
     align-items: center;
@@ -609,8 +326,7 @@ body, html {
     z-index: 100;
     background-color: transparent;
     height: 3em;
-
-
+    height: auto;
 }
 
 .izquierda-secondary-nav{
@@ -619,19 +335,41 @@ body, html {
     font-weight: 400;
     font-style: normal;
     font-size: 2rem;
+    height: auto;
 }
 
 
 .derecha-secondary-nav{
-    width: fit-content;
     display: flex;
-    justify-content: space-between;
-    align-content: center;
-    margin-left: auto;
-    font-family: "Dongle", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-    font-size: 2em;
+    align-items: center;
+    width: 100%;
+    justify-content: end;
+}
+
+@media (max-width: 800px) {
+    .derecha-secondary-nav{
+        display: flex;
+        margin: 0 auto;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+        padding-top: 10px;
+    }
+    .izquierda-secondary-nav{
+        display: none;
+    }
+    #icono-notificaciones-secondary-nav{
+        padding: 0;
+    }
+    #icono-perfil-secondary-nav{
+        padding: 0;
+    }
+    #texto-hojas-cong-secondary-nav{
+        padding: 0;
+    }
+    #texto-ramitas-secondary-nav{
+        padding: 0;
+    }
 }
 .sec-nav-perfil{
     display: flex;
@@ -642,16 +380,10 @@ body, html {
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 5px;
-    transition: background-color 0.3s;
     margin-top: auto;
     margin-bottom: auto;
-
-
 }
 
-.secondary-nav a:hover {
-    background-color: lightgray;
-}
 @media (max-width: 1100px){
     .Div-Principal {
         grid-template-columns: 1fr;
@@ -761,6 +493,7 @@ body, html {
 }
 #contenedor-hijos{
     max-height: 14vw;
+    min-height: 14vw;
     display: flex;
     flex-direction: column;
     padding-right: 1vw;
@@ -1023,4 +756,371 @@ td{
     width: 30px; /* Ajusta el ancho del gradiente */
     background: linear-gradient(to left, #ffffff, transparent);
     pointer-events: none; /* Ignora los clics en esta área */
+}
+
+/*Estilos nav corregido*/
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100vh;
+    width: 250px;
+    background-color: white;
+    padding: 10px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    transition: width 0.3s, height 0.3s, bottom 0.3s;
+    overflow: hidden;
+}
+
+.sidebar.collapsed {
+    width: 70px;
+}
+
+.logo-section, .icon-section, .bottom-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+
+.logo {
+    width: 1.5rem;
+    height: auto;
+}
+
+.icon-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.bottom-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+    padding-top: 0;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+    transition: padding 0.3s;
+        justify-content: flex-start;
+}
+
+.icon {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+#iconoNavLogo{
+    width: auto;
+    height: 2.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.textNav {
+    color: black;
+    font-size: 22px;
+    white-space: nowrap;
+    transition: display 0.3s, margin 0.3s;
+    font-family: "Gayathri", system-ui;
+    font-weight: 700;
+    font-style: normal;
+    margin: 0 auto;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+
+.sidebar.collapsed .text {
+    display: none;
+}
+
+.sidebar.collapsed .menu-item {
+    padding: 10px 15px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar.collapsed #logoNavbar{
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar.collapsed .menu-item .textNav {
+    display: none;
+}
+
+
+
+.menu-item:hover {
+    background-color: #EDF3FF;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.menu-item:hover .textNav {
+    color: #ADBBE4;
+}
+
+
+@media (max-height: 600px) {
+    .sidebar {
+        height: 100vh;
+        width: 250px; /* Mantener el ancho */
+        overflow-y: hidden; /* Evitar scroll vertical */
+    }
+
+    .icon-section {
+        display: flex;
+        flex-direction: column; /* Mantener los íconos en columna */
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .menu-item {
+        flex: 1;
+        justify-content: center;
+        padding: 10px 0;
+    }
+
+    .icon {
+        width: 35px;
+        height: 35px;
+    }
+
+    .bottom-section {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .sidebar.collapsed {
+        width: 70px;
+        height: auto;
+        overflow-y: hidden;
+    }
+
+    .sidebar.collapsed .icon-section {
+        flex-direction: column;
+    }
+
+    /* Asegurar que los íconos sean visibles en todas las resoluciones pequeñas */
+    .sidebar.collapsed .menu-item {
+        justify-content: center;
+        padding: 8px;
+    }
+
+    .sidebar.collapsed .menu-item .icon {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+@media (max-width: 768px) {
+.sidebar {
+    display:block;
+        flex-direction: row; /* Cambiar a fila */
+        height: auto; /* Ajustar la altura para móviles */
+        width: 100%; /* Tomar todo el ancho de la pantalla */
+        bottom: 0; /* Fijar en la parte inferior de la pantalla */
+        top: auto;
+        padding: 0;
+    }
+    .bottom-section {
+        display: none; /* Ocultar toda la sección inferior */
+    }
+
+    .menu-item.toggle {
+        display: none; /* Ocultar botones individuales */
+    }
+
+    .icon-section {
+        flex-direction: row; /* Distribuir los íconos en fila */
+        justify-content: space-between; /* Espaciarlos de manera uniforme */
+        align-items: center;
+        width: 100%;
+    }
+
+    .sidebar {
+        flex-direction: row;
+        height: auto;
+        width: 100%;
+        bottom: 0;
+        top: auto;
+        padding: 0;
+    }
+
+    .textNav{
+        display: none;
+    }
+
+    .logo-section,
+    .bottom-section {
+        display: none;
+    }
+
+    .menu-item {
+        flex: 1;
+        justify-content: center;
+        padding: 15px 0;
+    }
+
+    .icon {
+width: auto;
+        height: 5vw;
+    }
+
+    .sidebar.collapsed {
+        width: 100%;
+    }
+
+    .sidebar.collapsed .icon-section {
+        justify-content: space-between;
+        background-color: white;
+    }
+    .sidebar.collapsed .menu-item .icon {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+    }
+    .icon-section {
+        justify-content: space-between;
+        background-color: white;
+        padding: 0px;
+    }
+    .menu-item .icon {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    icon icon1 .icon icon1{
+        background-color: #EDF3FF;
+    }
+
+    #logoNavbar{
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        display: none;
+    }
+    .sidebar.collapsed #logoNavbar{
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        display: none;
+    }
+    .icon-section{
+        display:flex;
+        flex-direction: row;
+    }
+
+    #div_nav_home{
+        background-color: white;
+    }
+
+
+
+}
+
+@media (max-width: 645px) {
+ 
+
+    .menu-item {
+        padding: 10px 0;
+    }
+
+    .content {
+        padding: 20px;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+}
+
+@media (min-width:769px) {
+    .content {
+        margin-left: 270px;
+        padding: 20px;
+        padding-left: 40px;
+        height: 100%;
+        overflow-y: auto;
+    }
+    .sidebar.collapsed + .content {
+        margin-left: 90px;
+    }
+
+    .sidebar.collapsed .menu-item .icon {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 0;
+        left: 0;
+    }
+    .sidebar.collapsed #logoNavbar{
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+    }
+    
+
+}
+
+.content {
+    padding: 1vw;
+    background-color: #EDF3FF;
+    border-radius: 1rem;
+    
+    height: 100%;
+    margin-right: 1vw;
+    max-height: fit-content;
+    overflow: auto;
+
+}
+@media (max-width:768px){
+    .div-container-table-scroll{
+        display: none;
+    }
 }

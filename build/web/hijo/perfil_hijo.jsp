@@ -34,7 +34,7 @@
             </div>
             <div class="icon-section" id = "div_icon_section">
                 <div class="menu-item" id = "div_nav_home">
-                    <a href="home_tutor.jsp" class = "a_nav"> 
+                    <a href="home_hijo.jsp" class = "a_nav"> 
                         <img class="icon icon1" src="../img/icono_casita.svg">
                         <span class="textNav">Inicio</span>
                     </a>
@@ -52,7 +52,7 @@
                     </a>
                 </div>
                 <div class="menu-item">
-                    <a class="a_nav" href="diario_tutor.jsp">
+                    <a class="a_nav" href="diario_hijo.jsp">
                         <img class="icon icon1" src="../img/icono_diario.svg">
                         <span class="textNav">Diario</span>
                     </a>
@@ -87,11 +87,49 @@
                 <div class = "derecha-secondary-nav">
                     <a href="#"><img src="../img/iconito_notifiNotificacion.svg" class = "imgNavSecondary"></a>
                     <div class="sec-nav-perfil">
+                        <%
+                            session = request.getSession(false);
 
-                        <a href="perfil_tutor.jsp"> 
+                            if (session != null && session.getAttribute("usuario") != null) {
+                                String nombreUsuario = (String) session.getAttribute("usuario");
+
+                        %>
+                        <%                            Base bd = new Base();
+                            try {
+                                bd.conectar();
+
+                                String strQ = "select * from Kit where nombreUsuario = ?";
+                                PreparedStatement pstmt3 = bd.getConn().prepareStatement(strQ);
+                                pstmt3.setString(1, nombreUsuario);
+                                ResultSet rs = pstmt3.executeQuery();
+
+                                int idKit = 0;
+                                if (rs.next()) {
+                                    idKit = rs.getInt("idKit");
+                                }
+
+                                String consult = "select * from Kit where idKit = ?";
+                                PreparedStatement pstmt4 = bd.getConn().prepareStatement(consult);
+                                pstmt4.setInt(1, idKit);
+                                ResultSet r = pstmt4.executeQuery();
+
+                                while (r.next()) {
+                        %>
+                        <p class = "second-nav-nombre"><%=rs.getString(3)%></p>
+                        <%
+                                }
+                            } catch (Exception e) {
+                            }
+                        %>
+                        <%
+                            } else {
+                                // Si no hay sesión o no hay correo electrónico en la sesión, redirigir al usuario a la página de inicio de sesión
+                                response.sendRedirect("../formularios_sesion/inicio_sesion_tutor.jsp");
+                            }
+                        %>
+                        <a href="perfil_hijo.jsp"> 
                             <img src="../img/icono_Perfil.svg" class="imgNavSecondary">
                         </a>
-
                     </div>
                 </div>
             </div>
@@ -103,85 +141,93 @@
                         <img class="editar-perfil" src="../img/lapiz_edicion.svg">
                     </div>
                 </div>
-            </div>
-
-            <div class="grid-container">
+            </div> 
+            <div class="content1">
                 <div class="item">
                     <%
                         session = request.getSession(false);
 
-                        if (session != null && session.getAttribute("nombreUsuario") != null) {
-                            String nombreUsuario = (String) session.getAttribute("nombreUsuario");
-                            String codPresa = null;
-                            String nombre = null;
-                            String apellidos = null;
-                            int edad = 0;
-                            String etapaVida = null;
-                            int ramitas = 0;
-                            String imagenPerfil = null;
-                            String fechaRegistro = null;
+                        if (session != null && session.getAttribute("usuario") != null) {
+                            String nombreUsuario = (String) session.getAttribute("usuario");
 
-                            Base bd = new Base();
-                            try {
-                                bd.conectar();
-
-                                // Consulta para obtener información del Kit usando el nombre de usuario
-                                String strQ = "SELECT * FROM Kit WHERE nombreUsuario = ?";
-                                PreparedStatement pstmt = bd.getConn().prepareStatement(strQ);
-                                pstmt.setString(1, nombreUsuario);
-                                ResultSet rs = pstmt.executeQuery();
-
-                                if (rs.next()) {
-                                    codPresa = rs.getString("codPresa");
-                                    nombre = rs.getString("nombre");
-                                    apellidos = rs.getString("apellidos");
-                                    edad = rs.getInt("edad");
-                                    etapaVida = rs.getString("etapaVida");
-                                    ramitas = rs.getInt("ramitas");
-                                    imagenPerfil = rs.getString("imagenPerfil");
-                                    fechaRegistro = rs.getString("fechaRegistro");
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
                     %>
+                    <%                        
+                        String nombre = null;
+                        String apellidos = null;
+                        int edad = 0;
+                        String fechaRegistro = null;
+                        int ramitas = 0;
+                        int idKit = 0;
 
+                        Base bd = new Base();
+                        try {
+                            bd.conectar();
+
+                            String strQ = "SELECT *  FROM Kit WHERE nombreUsuario = ?";
+                            PreparedStatement pstmt = bd.getConn().prepareStatement(strQ);
+                            pstmt.setString(1, nombreUsuario);
+                            ResultSet rs = pstmt.executeQuery();
+
+                            if (rs.next()) {
+                                ramitas = rs.getInt("ramitas");
+                                nombre = rs.getString("nombre");
+                                apellidos = rs.getString("apellidos");
+                                edad = rs.getInt("edad");
+                                fechaRegistro = rs.getString("fechaRegistro");
+
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    %>
                     <p class="nombre"><%= nombre != null ? nombre : "No disponible"%> <%= apellidos != null ? apellidos : "No disponible"%></p>
-
+                    <p class="texto-user"><%= nombreUsuario != null ? nombreUsuario : "No disponible"%></p>
                 </div>
-                <div class="item-codigo">
-                    <p class="texto-codigo">Codigo présa:<br>
-                        <span id="codigoPresa"><%= codPresa != null ? codPresa : "No disponible"%></span>
-
-                    </p>
-                    <div class="img-copiarCodigo" onclick="copiarCodigo(event)">
-                        <img id="copiarIcon" class="Copiar" src="../img/icono_copiar.svg" alt="Copiar código">
+                <div class="row-info">
+                    <p class="texto-union">Se unió el <%= fechaRegistro != null ? fechaRegistro : "No disponible"%></p>
+                    <div class="item-codigo">
+                        <div>
+                            <p class="texto-personal">Ver informacion personal</p> 
+                        </div>
+                        <div class="img-copiarCodigo" onclick="toggleVisibility()">
+                            <img id="verIcon" class="Ver" src="../img/ojo.svg" alt="Ver informacion" />
+                        </div>
                     </div>
                 </div>
-                <p class="texto-union">Se unió el <%= fechaRegistro != null ? fechaRegistro : "No disponible"%></p>
-
-                <div class="item-codigo">
-                    <div >
-                        <p class ="texto-personal">Ver informacion personal<p> 
-                    </div>
-                    <div class="img-copiarCodigo" onclick="toggleVisibility()">
-                        <img id="verIcon" class="Ver" src="../img/ojo.svg" alt="Ver informacion" ">
-                    </div>     
-                </div>
-            </div>
-
-            <div class="infoAdicional"  id="infoAdicional">
-
-                <div class="info-item izquierda">
+                 <div class="infoAdicional"  id="infoAdicional">
+                <div class="info-item">
                     <p>Ramitas: <%= ramitas >= 0 ? ramitas : "No disponible"%></p>
                 </div>
-                <div class="info-item">
-                    <p><%= (edad >= 0 ? edad + " años" : "No disponible")%></p>
+                <div class="info-item-izquierda">
+                    
+                    <p><%= (edad >= 0 ? edad + " años " : "No disponible")%></p>
                 </div>
-                <div class="info-item izquierda">
-                    <img id="editarBoton" class="editarBoton" src="../img/editar_boton.svg" alt="Editar Información " ">
+                <div></div>
+                <div class="info-item-izquierda">
+                    <img id="editarBoton" class="editarBoton" src="../img/editar_boton.svg" alt="Editar Información ">
                 </div>
-            </div> <div class="line">
+            </div>
+            <div id="modalPremio" class="modal">
+                <div class="modal-content">
+                    <p class="titulo-modal-content">Editar información</p>
+                    <form action="editar_informacion_perfil_hijo.jsp" method="POST" id="info_actualizada">
+                        <input type="hidden" name="idCastor" value="<%= idKit%>">
+                        <div class="item-modal-content">                      
+                            <label>Nombre de usuario</label>
+                            <input type="text" name="nombreUsuario-acutalizado" value="<%= nombreUsuario%>" id="nombreUsuario-acutalizado">
+                            <span class = "error" id = "nombreError"></span>
+                        </div>
+
+                        <div class="item-modal-content-oper">
+                            <button type="button" onclick="cerrarModal()" class="btn-cancelar-modal" >Cancelar</button>
+                            <button type="submit" class="btn-crear-modal">Actualizar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </DIV>
+            </div>
+           <div class="line">
                 <hr>
             </div>
             <div class="estadisticas-container">
@@ -261,11 +307,13 @@
                         <img class="img-estadistica-ramita" src="../img/ramita_estadistica.svg">
                     </div>
                 </div>
-
-            </div>
+            <%
+            } else {
+                response.sendRedirect("../formularios_sesion/inicio_sesion_hijo.jsp");
+            }
+            %>
         </div>
-    </div>
-    <script src="../codigo_js/codigo_javascript_hijo/js_perfil_hijo.js" type="text/javascript"></script>
-</body>
-</html>
 
+        <script src="../codigo_js/codigo_javascript_hijo/js_perfil_hijo.js" type="text/javascript"></script>
+    </body>
+</html>

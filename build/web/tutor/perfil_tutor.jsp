@@ -210,8 +210,9 @@
 
                     </div>
                 </div>
+                        <div> 
                 <p class="texto-union">Se unió el <%= fechaRegistro != null ? fechaRegistro : "No disponible"%></p>
-
+                        </div>
                 <div class="item-codigo">
                     <div >
                         <p class ="texto-personal">Ver informacion personal<p> 

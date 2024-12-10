@@ -1,38 +1,9 @@
-:root{
-    --cafe: #885551;
-    --cafecito: #BA6958;
-    --cafecitititito: #F7B9A2;
-    --turquesita: #9FD8CB;
-    --awuita: #879FD4;
-    --azulito: #CFE1FF;
-    --amarillito: #FFDF9B;
-    --verdecito:#52B788;
-    --azul:#879FD4;
-}
-
-.gayathri-thin {
-    font-family: "Gayathri", system-ui;
-    font-weight: 100;
-    font-style: normal;
-}
-
-.gayathri-regular {
-    font-family: "Gayathri", system-ui;
-    font-weight: 400;
-    font-style: normal;
-}
-
-.gayathri-bold {
-    font-family: "Gayathri", system-ui;
-    font-weight: 700;
-    font-style: normal;
-}
-
 
 body, html {
     margin: 0;
     padding: 0;
-    height: 100%;
+    height: auto;
+    min-height: 100vh;
 }
 
 .sidebar {
@@ -264,7 +235,6 @@ body, html {
 
     .content {
         padding: 20px;
-        height: 100%;
         overflow-y: auto;
     }
 
@@ -275,7 +245,6 @@ body, html {
         margin-left: 270px;
         padding: 20px;
         padding-left: 40px;
-        height: 100%;
         overflow-y: auto;
     }
     .sidebar.collapsed + .content {
@@ -360,8 +329,10 @@ body, html {
 
 .content {
     padding: 20px;
-    height: 100%;
+    min-height: 100vh;
+    height: auto;
     background-color: #EDF3FF;
+    overflow: hidden;
 }
 
 
@@ -432,7 +403,6 @@ body, html {
 
     .content {
         padding: 20px;
-        height: 100%;
         overflow-y: auto;
     }
 
@@ -443,7 +413,6 @@ body, html {
         margin-left: 270px;
         padding: 20px;
         padding-left: 40px;
-        height: 100%;
         overflow-y: auto;
     }
     .sidebar.collapsed + .content {
@@ -472,6 +441,7 @@ body, html {
         height: auto;
         width: 250px; /* Mantener el ancho */
         overflow-y: hidden; /* Evitar scroll vertical */
+        z-index: 10;
     }
 
     .icon-section {
@@ -528,9 +498,13 @@ body, html {
 
 .content {
     padding: 20px;
-    height: 100%;
+    overflow-y: hidden;
+    min-height: 100vh;
+    height: auto;
+    padding-bottom: 0px;
     background-color: #EDF3FF;
 }
+
 
 
 
@@ -686,7 +660,7 @@ body, html {
     justify-content: flex-end;
     align-items: center;
     width: auto;
-    height: 100%;
+    height: auto;
 }
 
 .searchIcon {
@@ -740,7 +714,7 @@ body, html {
 
 .container-buscador{
     display: flex;
-    height: 100%;
+    height: auto;
     text-align: center;
     align-content: flex-end;
 }
@@ -1573,5 +1547,252 @@ input[type="number"]:focus {
 }
 
 /*contenido*/
+.body-notes{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+.primero{
+    display: flex;
+    position: relative;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 3vh;
+}
+
+.privacidad{
+    display: flex;
+    width: 100%;
+    position: absolute;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
+
+}
+.imgFondoPerfil{
+    width: 100%;
+}
+
+.tipo-nota{
+    display: flex;
+    gap: 15px;
+}
+.tipo-nota p{
+    margin:0;
+    font-family: "Gayathri";
+    font-weight: 700;
+    font-style: normal;
+    font-size: 7vh;
+}
+.segundo{
+    text-align: right;
+
+    padding-bottom: 3vh;
+}
+.segundo img{
+    cursor: pointer;
+}
+.tercero{
+    display: flex;
+    flex-direction: column;
+    row-gap: 3vh;
+    padding-bottom: 3vh;
+}
+.seccion-notas{
+    display: flex;
+    flex-direction: column;
+}
+
+.texto-nota-this-month, .texto-nota-ant-month, .texto-nota-antS-month {
+    font-family: "Gayathri";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 4vh;
+}
 
 
+/*para este mes*/
+.notas-thismonth-sinDesplegar{
+    flex: auto;
+    display: flex;
+    flex-direction: row;
+    gap:2.5%;
+    align-items: center;
+}
+.notas-thismonth-Desplegado{
+    flex: auto;
+    margin-bottom: 30px;
+}
+.notas-this-mont-flecha, .notas-ant-mont-flecha, .notas-antS-mont-flecha{
+    cursor: pointer;
+}
+/*para mes siguiente*/
+#notas-antmonth-sinDesplegar{
+    flex: auto;
+    display: flex;
+    flex-direction: row;
+    gap:2.5%;
+    align-items: center;
+}
+#notas-antmonth-Desplegado{
+    flex: auto;
+    margin-bottom: 30px;
+}
+/*para meses anteriores*/
+#notas-antSmonth-sinDesplegar{
+    flex: auto;
+    display: flex;
+    flex-direction: row;
+    gap:2.5%;
+    align-items: center;
+}
+#notas-antSmonth-Desplegado{
+    flex: auto;
+    margin-bottom: 30px;
+}
+
+/*general de notas*/
+
+
+.nota-desplegada-sentimiento-img{
+    flex: 0 0 60px;
+}
+.nota-desplegada-sentimiento-img img{
+    width: 100%;
+    height: 100%;
+}
+.nota-desplegada-titulo {
+    flex: 1;
+}
+.nota-desplegada-titulo p{
+     font-family: "Gayathri";
+    font-weight: 700;
+    font-style: normal;
+    font-size: 5vh;
+    margin: 0;
+    padding: 0;
+}
+.nota-desplegada-fecha {
+    flex: 0 0 150px;
+}
+
+.contenedor-cada-nota{
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    gap:3%;
+    align-items: center;
+    padding-top: 3%;
+}
+.contenedor-cada-nota:hover {
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más grande */
+    transform: scale(1); /* Pequeño efecto de zoom */
+}
+.linea-divisoria{
+    width: 100%;
+}
+/*modal para nota*/
+.modal-Notas {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-contenido {
+    display: flex;
+    flex-direction: column;
+    width: 90%;               
+    max-width: 100vh;         
+    max-height: 80vh;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-contenido-nota{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.textos-modal-nota{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.img-feel-modal-content{
+    flex: .5;
+}
+.img-feel-modal-content img{
+    width: 100%;
+    height: 100%;
+}
+.titulo-modal-content {
+    margin: 0;
+    padding: 0;
+    font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 4vw;
+    text-align: left;
+}
+.titulo-modal-content p{
+    margin: 0;
+    padding: 0;
+}
+.textos-modal-nota{
+    flex: 3;
+}
+.modal-content form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 3%;
+}
+.item-modal-content {
+    display: flex;
+    flex-direction: column; 
+}
+.item-modal-content label{
+    font-family: "Gayathri", system-ui;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 1.5vw;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+        
+}
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.item-modal-content-oper{
+   justify-content: right;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+button.btn-cancelar-modal{
+    background-color: #EE6464;
+    border-radius: 3px;
+    border: none;
+     color: white;
+     height: 30px;
+}

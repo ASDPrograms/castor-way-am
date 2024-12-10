@@ -88,9 +88,9 @@ window.onload = function () {
 function toggleVisibility() {
     const infoAdicional = document.getElementById("infoAdicional");
     if (infoAdicional.style.display === "none" || infoAdicional.style.display === "") {
-        infoAdicional.style.display = "grid"; // Mostrar el elemento como grilla
+        infoAdicional.style.display = "grid"; 
     } else {
-        infoAdicional.style.display = "none"; // Ocultar el elemento
+        infoAdicional.style.display = "none"; 
     }
 }
 document.addEventListener('DOMContentLoaded', function () {

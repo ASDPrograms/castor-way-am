@@ -23,6 +23,8 @@
     </head>
     <body>
         <%
+            session = request.getSession(false);
+
             if (session == null || session.getAttribute("email") == null) {
                 response.sendRedirect("../formularios_sesion/inicio_sesion_tutor.jsp");
             } else {
@@ -103,7 +105,7 @@
                     <a style="display: flex; padding-bottom: 0;" id="text-tit-act-sec-nav">Actividades</a>
                 </div>
                 <div class = "derecha-secondary-nav">
-                    <%                     
+                    <%
                         session = request.getSession(false);
 
                         if (session != null && session.getAttribute("idKit") != null) {
@@ -153,7 +155,192 @@
                 </div>
             </div>
             <div class="cuerpo-actividades">
-               
+                <div class="chat-container">
+                    <div class="expanded-section expanded">
+                        <div class="chat-info-user">
+                            <img class="icon icon1" id="icon-desplegar-users-chat" src="../img/icono_MenuDesplegable.svg" onclick="toggleNavSection()">
+
+                            <%
+                                if (session == null || session.getAttribute("email") == null) {
+                                } else {
+                                    try {
+                                        String codPresa = "";
+                                        Base bd = new Base();
+                                        bd.conectar();
+
+                                        String email = (String) session.getAttribute("email");
+                                        String query = "SELECT * FROM Castor WHERE email = ?";
+                                        PreparedStatement pstmt = bd.getConn().prepareStatement(query);
+                                        pstmt.setString(1, email);
+                                        ResultSet rs = pstmt.executeQuery();
+
+                                        if (rs.next()) {
+                                            codPresa = rs.getString("codPresa");
+                                        }
+
+                                        String query2 = "SELECT * FROM Kit WHERE codPresa = ?";
+                                        PreparedStatement pstmt2 = bd.getConn().prepareStatement(query2);
+                                        pstmt2.setString(1, codPresa);
+                                        ResultSet rs2 = pstmt2.executeQuery();
+
+                                        String urlImg = "";
+                                        int idKit = 0;
+                                        String userName = "";
+                                        while (rs2.next()) {
+                                            idKit = rs2.getInt("idKit");
+                                            userName = rs2.getString("nombreUsuario");
+                                            urlImg = rs2.getString("imagenPerfil");
+
+                            %>
+                            <form action="seleccionarUsuarioChat.jsp" method="post" id="idFormSelectUserChat">
+                                <input value="<%= userName%>" name="nombreUsuario" type="hidden">
+                                <input value="<%= idKit%>" name="idKit" type="hidden">
+                                <button style="text-decoration: none;" type="submit">
+                                    <div class="user-item">
+                                        <img class="img-perfil-user-chat" src="<%= urlImg%>">
+                                        <p><%= userName%></p>
+                                    </div>
+                                </button>
+                            </form>
+                            <%
+                                        }
+                                    } catch (Exception e) {
+                                        out.print(e.getMessage());
+                                    }
+
+                                }
+                            %>
+                        </div>
+                    </div>
+
+                    <div class="chat-body">
+                        <%
+                            String usuarioSeleccionado = (String) session.getAttribute("usuarioSeleccionado");
+                            String nombreUsuarioSeleccionado = (String) session.getAttribute("nombreUsuarioSeleccionado");
+                            if (usuarioSeleccionado == null) {
+                        %>
+                        <script>
+                            const usuarioSeleccionado = "<%= usuarioSeleccionado != null ? usuarioSeleccionado : ""%>";
+                            console.log(usuarioSeleccionado);
+                        </script>
+                        <p>Por favor, seleccione un usuario haciendo clic en su imagen para iniciar el chat.</p>
+                        <%
+                        } else {
+                        %>
+                        <script>
+                            const usuarioSeleccionado = "<%= usuarioSeleccionado != null ? usuarioSeleccionado : ""%>";
+                            console.log(usuarioSeleccionado);
+                        </script>
+                        <div class="chat-messages">
+                            <div class="contenido-mensajes" id="contenido-mensajes">
+                                <p>Chat con: <%= nombreUsuarioSeleccionado%></p>
+
+
+
+                                <%
+                                    if (session == null || session.getAttribute("email") == null) {
+                                    } else {
+                                        try {
+                                            String codPresa = "";
+                                            Base bd = new Base();
+                                            bd.conectar();
+
+                                            String email = (String) session.getAttribute("email");
+                                            String idKitS = (String) session.getAttribute("usuarioSeleccionado");
+                                            int idKit = Integer.parseInt(idKitS);
+
+                                            String query = "SELECT * FROM Castor WHERE email = ?";
+                                            PreparedStatement pstmt = bd.getConn().prepareStatement(query);
+                                            pstmt.setString(1, email);
+                                            ResultSet rs = pstmt.executeQuery();
+                                            int idCastor = 0;
+                                            if (rs.next()) {
+                                                idCastor = rs.getInt("idCastor");
+                                            }
+
+                                %>
+
+
+
+
+                                <%                                    try {
+                                        bd.conectar();
+
+                                        String consultaMensajes = "SELECT * FROM chat WHERE (idKit = ? AND idCastor = ?) ORDER BY fechaEnvio ASC";
+                                        PreparedStatement pstmtMensajes = bd.getConn().prepareStatement(consultaMensajes);
+                                        pstmtMensajes.setInt(1, idKit);
+                                        pstmtMensajes.setInt(2, idCastor);
+
+                                        ResultSet rsMensajes = pstmtMensajes.executeQuery();
+                                        while (rsMensajes.next()) {
+                                            String emisor = rsMensajes.getString("emisor");
+                                            String mensaje = rsMensajes.getString("contenido");
+                                            String claseMensaje = emisor.equals("Tutor") ? "mensaje-enviado" : "mensaje-recibido";
+
+                                %>
+                                <div class="mensaje <%= claseMensaje%>">
+                                    <p><%= mensaje%></p>
+                                </div>
+                                <%
+                                        }
+                                    } catch (Exception e) {
+                                        out.print("Error cargando mensajes: " + e.getMessage());
+                                    }
+                                %>
+                                <%} catch (Exception e) {
+                                            out.print(e.getMessage());
+                                        }
+
+                                    }
+                                %>
+
+                            </div>
+                            <div class="chat-input">
+                                <%
+                                    if (session == null || session.getAttribute("email") == null) {
+                                    } else {
+                                        try {
+                                            String codPresa = "";
+                                            Base bd = new Base();
+                                            bd.conectar();
+
+                                            String email = (String) session.getAttribute("email");
+                                            String query = "SELECT * FROM Castor WHERE email = ?";
+                                            PreparedStatement pstmt = bd.getConn().prepareStatement(query);
+                                            pstmt.setString(1, email);
+                                            ResultSet rs = pstmt.executeQuery();
+
+                                            int idCastor = 0;
+                                            if (rs.next()) {
+                                                idCastor = rs.getInt("idCastor");
+                                                codPresa = rs.getString("codPresa");
+                                            }
+
+                                            String query2 = "SELECT * FROM Kit WHERE codPresa = ?";
+                                            PreparedStatement pstmt2 = bd.getConn().prepareStatement(query2);
+                                            pstmt2.setString(1, codPresa);
+                                            ResultSet rs2 = pstmt2.executeQuery();
+                                %>
+                                <input id="idCastorInputMsj" value="<%= idCastor%>" name="idCastor" type="hidden">
+                                <input id="idKitInputMsj" value="<%= session.getAttribute("usuarioSeleccionado")%>" name="idKit" type="hidden">
+                                <input id="idEmisorInputMsj" value="Tutor" name="emisor" type="hidden">
+                                <%
+
+                                        } catch (Exception e) {
+                                            out.print(e.getMessage());
+                                        }
+
+                                    }
+                                %>
+                                <textarea id="idMsjInputMsj" name="txtMsj" id="inputMsj" placeholder="Escribe un mensaje..."></textarea>
+                                <button type="submit" id="btnEnviarMsj">Enviar</button>
+                            </div>
+                        </div>
+                        <%
+                            }
+                        %>
+                    </div>
+                </div>
             </div>
         </div>
         <script src="../codigo_js/codigo_javascript_tutor/js_chat_tutor.js" type="text/javascript"></script>

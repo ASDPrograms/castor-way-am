@@ -125,18 +125,490 @@
                         <a href="perfil_tutor.jsp"> 
                             <img src="../img/icono_Perfil.svg" class="imgNavSecondary">
                         </a>
+
                     </div>
                 </div>
             </div>
-            <div class="content-notas">
-               
-                    <img src="../img/fondo_perfil.svg" class="imgFondoNotas">
+            <div class="body-notes">
+                <div class="primero">
+                    <img src="../img/fondo_perfil.svg" class="imgFondoPerfil">
+                    <div class="privacidad">
+                        <div class="tipo-nota">
+                            <p>Notas publicas</p>
+                        </div>
+                    </div>
+                </div>
                 
-                <div class="p-notas">
-                    <p>Notas privadas</p>
+                <div class="tercero">
+                    <div class="seccion-notas" id="seccion-not-this-month"> 
+
+                        <div class="notas-thismonth-sinDesplegar" id="notas-thismonth-sinDesplegar" onclick="desplegar()">
+                            <div class="texto-nota-this-month">
+                                Este mes
+                            </div>
+                            <div class="notas-this-mont-flecha">
+                                <img src="../img/flechita-abajo.svg" class="imgFlechaDesplegar">
+                            </div>
+                        </div>
+                        <div class="notas-thismonth-Desplegado" id="notas-thismonth-Desplegado" style="display: none;">
+                            <%
+session = request.getSession(false);
+
+if (session != null && session.getAttribute("email") != null) {
+    String email = (String) session.getAttribute("email");
+    Base bd = new Base();
+
+    try {
+        bd.conectar();
+        System.out.println("Conexión a la base de datos establecida.");
+        System.out.println("Email recibido: " + email);
+
+        String queryCastor = "SELECT idCastor FROM Castor WHERE email = ?";
+        PreparedStatement stmt = bd.getConn().prepareStatement(queryCastor);
+        stmt.setString(1, email);
+        ResultSet rs = stmt.executeQuery();
+
+        int idCastor = -1;
+        if (rs.next()) {
+            idCastor = rs.getInt("idCastor");
+            System.out.println("idCastor encontrado: " + idCastor);
+        } else {
+            System.out.println("No se encontró idCastor para el email proporcionado.");
+        }
+
+        if (idCastor == -1) {
+            throw new Exception("El tutor no está registrado.");
+        }
+
+        String queryIdKits = "SELECT idKit FROM relDiario WHERE idCastor = ?";
+        stmt = bd.getConn().prepareStatement(queryIdKits);
+        stmt.setInt(1, idCastor);
+        rs = stmt.executeQuery();
+
+        boolean found = false;
+        System.out.println("Buscando idKit relacionados con idCastor: " + idCastor);
+
+        while (rs.next()) {
+            int idKit = rs.getInt("idKit");
+            System.out.println("idKit encontrado: " + idKit);
+
+          
+            String queryNotasRelDiario =
+                "SELECT d.titulo, d.info, d.imgPrivacidad, d.imgSentimiento, d.diaCreacion " +
+                "FROM diario d " +
+                "WHERE d.idKit = ? AND d.privacidad = 0 " +
+                "AND MONTH(d.diaCreacion) = MONTH(CURRENT_DATE()) " +
+                "AND YEAR(d.diaCreacion) = YEAR(CURRENT_DATE())";
+
+            PreparedStatement stmtNotas = bd.getConn().prepareStatement(queryNotasRelDiario);
+            stmtNotas.setInt(1, idKit);
+            
+            ResultSet rsNotas = stmtNotas.executeQuery();
+
+            // Depuración: Validar si hay resultados
+            boolean hayNotas = false;
+           
+            while (rsNotas.next()) {
+                try {
+                    
+                    hayNotas = true;
+                    found = true;
+                    
+                    String titulo = rsNotas.getString("titulo");
+                    String info = rsNotas.getString("info");
+                    String imgPrivacidad = rsNotas.getString("imgPrivacidad");
+                    String imgSentimiento = rsNotas.getString("imgSentimiento");
+                    Timestamp diaCreacion = rsNotas.getTimestamp("diaCreacion");
+
+                    System.out.println("Nota encontrada: Título=" + titulo);
+                            %>
+                            <div class="contenedor-cada-nota" 
+                                 data-titulo="<%= titulo %>" 
+                                 data-info="<%= info %>" 
+                                 data-fecha="<%= diaCreacion %>" 
+                                 data-sentimiento="<%= imgSentimiento %>">
+                                <div class="nota-desplegada-sentimiento-img">
+                                    <img id="estado-animo-img"
+                                         src="../img/estado_animo_img/<%= imgSentimiento %>.svg" 
+                                         class="imgSentimiento">
+                                </div>
+                                <div class="nota-desplegada-titulo">
+                                    <p><%= titulo %></p>
+                                </div>
+                                <div class="nota-desplegada-fecha">
+                                    <p><%= diaCreacion %></p>
+                                </div>
+                            </div>
+                            <hr class="linea-divisoria">
+                            <div id="modal-Notas" class="modal-Notas" style="display: none;">
+                                <div class="modal-contenido">
+                                    <div class="modal-contenido-nota">
+                                        <div class="textos-modal-nota">
+                                            <div class="titulo-modal-content">
+                                                <p id="modal-titulo"></p>
+                                            </div>
+                                            <div class="date-modal-content">
+                                                <p id="modal-fecha"></p>
+                                            </div>
+                                            <div class="texto-modal-content">
+                                                <p id="modal-info"></p>
+                                            </div>
+                                        </div>
+                                        <div class="img-feel-modal-content">
+                                            <img id="modal-img-sentimiento" class="imgSentimientoModal">
+                                        </div>
+                                    </div>
+                                    <div class="item-modal-content-oper">
+                                        <button type="button" onclick="cerrarModal()" class="btn-cancelar-modal">Cancelar</button>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <%
+                                            } catch (Exception e) {
+                                                System.err.println("Error al procesar los datos de la nota: " + e.getMessage());
+                                                e.printStackTrace();
+                                            }
+                                        }
+
+                                        if (!hayNotas) {
+                                            System.out.println("No se encontraron notas para idKit: " + idKit);
+                                        }
+                                    }
+
+                                    if (!found) {
+                            %>
+                            <p>No se encontraron notas de tu Kit públicas en este mes.</p>
+                            <%
+                                    }
+
+                                } catch (Exception e) {
+                                    System.err.println("Error general: " + e.getMessage());
+                                    e.printStackTrace();
+                                } finally {
+                                    bd.cierraConexion();
+                                }
+
+                            } else {
+                                response.sendRedirect("../formularios_sesion/inicio_sesion_hijo.jsp");
+                            }
+                            %>
+
+                        </div>
+                    </div>
+                            <div class="seccion-notas" id="seccion-not-ant-month"> 
+                        <div id="notas-antmonth-sinDesplegar" onclick="desplegar2()">
+                            <div class="texto-nota-ant-month">
+                                Mes Anterior
+                            </div>
+                            <div class="notas-ant-mont-flecha">
+                                <img src="../img/flechita-abajo.svg" class="imgFlechaDesplegar2">
+                            </div>
+                        </div>
+                        <div id="notas-antmonth-Desplegado" style="display: none;">
+                           <%
+session = request.getSession(false);
+
+if (session != null && session.getAttribute("email") != null) {
+    String email = (String) session.getAttribute("email");
+    Base bd = new Base();
+
+    try {
+        bd.conectar();
+        System.out.println("Conexión a la base de datos establecida.");
+        System.out.println("Email recibido: " + email);
+
+        String queryCastor = "SELECT idCastor FROM Castor WHERE email = ?";
+        PreparedStatement stmt = bd.getConn().prepareStatement(queryCastor);
+        stmt.setString(1, email);
+        ResultSet rs = stmt.executeQuery();
+
+        int idCastor = -1;
+        if (rs.next()) {
+            idCastor = rs.getInt("idCastor");
+            System.out.println("idCastor encontrado: " + idCastor);
+        } else {
+            System.out.println("No se encontró idCastor para el email proporcionado.");
+        }
+
+        if (idCastor == -1) {
+            throw new Exception("El tutor no está registrado.");
+        }
+
+        String queryIdKits = "SELECT idKit FROM relDiario WHERE idCastor = ?";
+        stmt = bd.getConn().prepareStatement(queryIdKits);
+        stmt.setInt(1, idCastor);
+        rs = stmt.executeQuery();
+
+        boolean found = false;
+        System.out.println("Buscando idKit relacionados con idCastor: " + idCastor);
+
+        while (rs.next()) {
+            int idKit = rs.getInt("idKit");
+            System.out.println("idKit encontrado: " + idKit);
+
+          
+          String queryNotasRelDiarioMesAnterior =
+                "SELECT d.titulo, d.info, d.imgPrivacidad, d.imgSentimiento, d.diaCreacion " +
+                "FROM diario d " +
+                "WHERE d.idKit = ? AND d.privacidad = 0 " +
+                "AND MONTH(d.diaCreacion) = MONTH(CURRENT_DATE() - INTERVAL 1 MONTH) " +
+                "AND YEAR(d.diaCreacion) = YEAR(CURRENT_DATE() - INTERVAL 1 MONTH)";
+
+PreparedStatement stmtNotas = bd.getConn().prepareStatement(queryNotasRelDiarioMesAnterior);
+stmtNotas.setInt(1, idKit);
+            ResultSet rsNotas = stmtNotas.executeQuery();
+
+            // Depuración: Validar si hay resultados
+            boolean hayNotas = false;
+           
+            while (rsNotas.next()) {
+                try {
+                    
+                    hayNotas = true;
+                    found = true;
+                    
+                    String titulo = rsNotas.getString("titulo");
+                    String info = rsNotas.getString("info");
+                    String imgPrivacidad = rsNotas.getString("imgPrivacidad");
+                    String imgSentimiento = rsNotas.getString("imgSentimiento");
+                    Timestamp diaCreacion = rsNotas.getTimestamp("diaCreacion");
+
+                    System.out.println("Nota encontrada: Título=" + titulo);
+                            %>
+                            <div class="contenedor-cada-nota" 
+                                 data-titulo="<%= titulo %>" 
+                                 data-info="<%= info %>" 
+                                 data-fecha="<%= diaCreacion %>" 
+                                 data-sentimiento="<%= imgSentimiento %>">
+                                <div class="nota-desplegada-sentimiento-img">
+                                    <img id="estado-animo-img"
+                                         src="../img/estado_animo_img/<%= imgSentimiento%>.svg" 
+                                         class="imgSentimiento">
+                                </div>
+                                <div class="nota-desplegada-titulo">
+                                    <p><%= titulo%></p>
+                                </div>
+                                <div class="nota-desplegada-fecha">
+                                    <p><%= diaCreacion%></p>
+                                </div>
+                            </div>
+                            <hr class="linea-divisoria">
+                            <div id="modal-Notas" class="modal-Notas" style="display: none;">
+                                <div class="modal-contenido">
+                                    <div class="modal-contenido-nota">
+                                        <div class="textos-modal-nota">
+                                            <div class="titulo-modal-content">
+                                                <p id="modal-titulo"></p>
+                                            </div>
+                                            <div class="date-modal-content">
+                                                <p id="modal-fecha"></p>
+                                            </div>
+                                            <div class="texto-modal-content">
+                                                <p id="modal-info"></p>
+                                            </div>
+                                        </div>
+                                        <div class="img-feel-modal-content">
+                                            <img id="modal-img-sentimiento" class="imgSentimientoModal">
+                                        </div>
+                                    </div>
+                                    <div class="item-modal-content-oper">
+                                        <button type="button" onclick="cerrarModal()" class="btn-cancelar-modal">Cancelar</button>
+                                       
+        
+                                    </div>
+                                </div>
+                            </div>
+                          <%
+                                            } catch (Exception e) {
+                                                System.err.println("Error al procesar los datos de la nota: " + e.getMessage());
+                                                e.printStackTrace();
+                                            }
+                                        }
+
+                                        if (!hayNotas) {
+                                            System.out.println("No se encontraron notas para idKit: " + idKit);
+                                        }
+                                    }
+
+                                    if (!found) {
+                            %>
+                            <p>No se encontraron notas de tu Kit públicas del mes anterior.</p>
+                            <%
+                                    }
+
+                                } catch (Exception e) {
+                                    System.err.println("Error general: " + e.getMessage());
+                                    e.printStackTrace();
+                                } finally {
+                                    bd.cierraConexion();
+                                }
+
+                            } else {
+                                response.sendRedirect("../formularios_sesion/inicio_sesion_hijo.jsp");
+                            }
+                            %>
+                        </div>
+                    </div>
+                        <div class="seccion-notas" id="seccion-not-ant-month"> 
+                        <div id="notas-antmonth-sinDesplegar" onclick="desplegar3()">
+                            <div class="texto-nota-ant-month">
+                                Meses Anteriores
+                            </div>
+                            <div class="notas-ant-mont-flecha">
+                                <img src="../img/flechita-abajo.svg" class="imgFlechaDesplegar2">
+                            </div>
+                        </div>
+                        <div id="notas-antSmonth-Desplegado" style="display: none;">
+                           <%
+session = request.getSession(false);
+
+if (session != null && session.getAttribute("email") != null) {
+    String email = (String) session.getAttribute("email");
+    Base bd = new Base();
+
+    try {
+        bd.conectar();
+        System.out.println("Conexión a la base de datos establecida.");
+        System.out.println("Email recibido: " + email);
+
+        String queryCastor = "SELECT idCastor FROM Castor WHERE email = ?";
+        PreparedStatement stmt = bd.getConn().prepareStatement(queryCastor);
+        stmt.setString(1, email);
+        ResultSet rs = stmt.executeQuery();
+
+        int idCastor = -1;
+        if (rs.next()) {
+            idCastor = rs.getInt("idCastor");
+            System.out.println("idCastor encontrado: " + idCastor);
+        } else {
+            System.out.println("No se encontró idCastor para el email proporcionado.");
+        }
+
+        if (idCastor == -1) {
+            throw new Exception("El tutor no está registrado.");
+        }
+
+        String queryIdKits = "SELECT idKit FROM relDiario WHERE idCastor = ?";
+        stmt = bd.getConn().prepareStatement(queryIdKits);
+        stmt.setInt(1, idCastor);
+        rs = stmt.executeQuery();
+
+        boolean found = false;
+        System.out.println("Buscando idKit relacionados con idCastor: " + idCastor);
+
+        while (rs.next()) {
+            int idKit = rs.getInt("idKit");
+            System.out.println("idKit encontrado: " + idKit);
+
+          
+            String queryNotasRelDiarioMesesAnterior =
+                "SELECT d.titulo, d.info, d.imgPrivacidad, d.imgSentimiento, d.diaCreacion " +
+                "FROM diario d " +
+                "WHERE d.idKit = ? AND d.privacidad = 0 " +
+                "AND MONTH(d.diaCreacion) = MONTH(CURRENT_DATE() - INTERVAL 2 MONTH) " +
+                "AND YEAR(d.diaCreacion) = YEAR(CURRENT_DATE() - INTERVAL 2 MONTH)";
+
+PreparedStatement stmtNotas = bd.getConn().prepareStatement(queryNotasRelDiarioMesesAnterior);
+stmtNotas.setInt(1, idKit);
+            
+            ResultSet rsNotas = stmtNotas.executeQuery();
+
+            // Depuración: Validar si hay resultados
+            boolean hayNotas = false;
+           
+            while (rsNotas.next()) {
+                try {
+                    
+                    hayNotas = true;
+                    found = true;
+                    
+                    String titulo = rsNotas.getString("titulo");
+                    String info = rsNotas.getString("info");
+                    String imgPrivacidad = rsNotas.getString("imgPrivacidad");
+                    String imgSentimiento = rsNotas.getString("imgSentimiento");
+                    Timestamp diaCreacion = rsNotas.getTimestamp("diaCreacion");
+
+                    System.out.println("Nota encontrada: Título=" + titulo);
+                            %>
+
+                            <div class="contenedor-cada-nota" 
+                                 data-titulo="<%= titulo %>" 
+                                 data-info="<%= info %>" 
+                                 data-fecha="<%= diaCreacion %>" 
+                                 data-sentimiento="<%= imgSentimiento %>">
+                                <div class="nota-desplegada-sentimiento-img">
+                                    <img id="estado-animo-img"
+                                         src="../img/estado_animo_img/<%= imgSentimiento%>.svg" 
+                                         class="imgSentimiento">
+                                </div>
+                                <div class="nota-desplegada-titulo">
+                                    <p><%= titulo%></p>
+                                </div>
+                                <div class="nota-desplegada-fecha">
+                                    <p><%= diaCreacion%></p>
+                                </div>
+                            </div>
+                            <hr class="linea-divisoria">
+                            <div id="modal-Notas" class="modal-Notas" style="display: none;">
+                                <div class="modal-contenido">
+                                    <div class="modal-contenido-nota">
+                                        <div class="textos-modal-nota">
+                                            <div class="titulo-modal-content">
+                                                <p id="modal-titulo"></p>
+                                            </div>
+                                            <div class="date-modal-content">
+                                                <p id="modal-fecha"></p>
+                                            </div>
+                                            <div class="texto-modal-content">
+                                                <p id="modal-info"></p>
+                                            </div>
+                                        </div>
+                                        <div class="img-feel-modal-content">
+                                            <img id="modal-img-sentimiento" class="imgSentimientoModal">
+                                        </div>
+                                    </div>
+                                    <div class="item-modal-content-oper">
+                                        <button type="button" onclick="cerrarModal()" class="btn-cancelar-modal">Cancelar</button>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                          <%
+                                            } catch (Exception e) {
+                                                System.err.println("Error al procesar los datos de la nota: " + e.getMessage());
+                                                e.printStackTrace();
+                                            }
+                                        }
+
+                                        if (!hayNotas) {
+                                            System.out.println("No se encontraron notas para idKit: " + idKit);
+                                        }
+                                    }
+
+                                    if (!found) {
+                            %>
+                            <p>No se encontraron notas de tu Kit públicas de los meses anteriores.</p>
+                            <%
+                                    }
+
+                                } catch (Exception e) {
+                                    System.err.println("Error general: " + e.getMessage());
+                                    e.printStackTrace();
+                                } finally {
+                                    bd.cierraConexion();
+                                }
+
+                            } else {
+                                response.sendRedirect("../formularios_sesion/inicio_sesion_hijo.jsp");
+                            }
+                            %>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <script src="../codigo_js/codigo_javascript_tutor/js_diario_tutor.js" type="text/javascript"></script>
-    </body>
+                   
+ <script src="../codigo_js/codigo_javascript_tutor/js_diario_tutor.js" type="text/javascript"></script>
+</body>
 </html>

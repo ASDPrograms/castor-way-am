@@ -89,7 +89,7 @@
                 String sql = "SELECT COUNT(*) AS count FROM Actividad WHERE "
                         + "((diaInicioHabito BETWEEN ? AND ?) OR (diaMetaHabito BETWEEN ? AND ?) OR "
                         + "(diaInicioHabito <= ? AND diaMetaHabito >= ?)) AND "
-                        + "((horaInicioHabito <= ? AND horaFinHabito >= ?) OR (horaInicioHabito <= ? AND horaFinHabito >= ?)) AND "
+                        + "((horaInicioHabito < ? AND horaFinHabito > ?) OR (horaInicioHabito < ? AND horaFinHabito > ?)) AND "
                         + "idKit = ?";
 
                 stmt = conn.prepareStatement(sql);

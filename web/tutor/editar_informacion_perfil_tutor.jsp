@@ -104,7 +104,7 @@
                     pstmt.setString(index++, apellidosActualizado);
                  }
 
-              pstmt.setString(index, idCastor);
+                pstmt.setString(index, idCastor);
                 pstmt.executeUpdate();
 
                
